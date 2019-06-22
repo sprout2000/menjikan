@@ -2,13 +2,13 @@
   "name": "ramen-timer",
   "version": "1.0.0",
   "description": "A simple timer for ramen",
-  "homepage": "https://prefab1983.github.io/ramen-timer",
+  "homepage": "https://officenishigami.github.io/ramen-timer",
   "private": true,
   "license": "MIT",
   "author": {
-    "name": "prefab1983",
-    "email": "k_konno1983@yahoo.co.jp",
-    "url": "https://github.com/prefab1983"
+    "name": "OfficeNishigami",
+    "email": "office@nishigami.jp",
+    "url": "https://github.com/officenishigami"
   },
   "scripts": {
     "clean": "rm -rf build/*",
