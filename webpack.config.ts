@@ -1,11 +1,17 @@
 import path from 'path';
 import webpack from 'webpack';
+import WebpackDevServer from 'webpack-dev-server';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import WorkboxWebpackPlugin from 'workbox-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const isDev = process.env.NODE_ENV === 'development';
+
+const server: WebpackDevServer.Configuration = {
+  contentBase: path.resolve(__dirname, 'build'),
+  port: 9090,
+};
 
 const config: webpack.Configuration = {
   mode: isDev ? 'development' : 'production',
@@ -69,6 +75,7 @@ const config: webpack.Configuration = {
   },
   stats: 'minimal',
   devtool: isDev ? 'source-map' : false,
+  devServer: server,
 };
 
 export default config;
