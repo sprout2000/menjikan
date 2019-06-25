@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import ons from 'onsenui';
 
+ons.disableAutoStyling();
+
 ReactDOM.render(<App />, document.getElementById('root'));
 
 if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
