@@ -2,13 +2,13 @@
   "name": "ramen-timer",
   "version": "1.0.0",
   "description": "A simple timer for ramen",
-  "homepage": "https://maydaymin.github.io/ramen-timer",
+  "homepage": "https://tofumen.github.io/ramen-timer",
   "private": true,
   "license": "MIT",
   "author": {
-    "name": "maydaymin",
+    "name": "tofumen",
     "email": "office@nishigami.jp",
-    "url": "https://github.com/maydaymin"
+    "url": "https://github.com/tofumen"
   },
   "scripts": {
     "clean": "rm -rf build/*",
