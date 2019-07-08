@@ -2,13 +2,13 @@
   "name": "ramen-timer",
   "version": "1.0.0",
   "description": "A simple timer for ramen",
-  "homepage": "https://tofumen.github.io/ramen-timer",
+  "homepage": "https://tofugeek.github.io/ramen-timer",
   "private": true,
   "license": "MIT",
   "author": {
-    "name": "tofumen",
+    "name": "tofugeek",
     "email": "office@nishigami.jp",
-    "url": "https://github.com/tofumen"
+    "url": "https://github.com/tofugeek"
   },
   "scripts": {
     "clean": "rm -rf build/*",
