@@ -13,9 +13,8 @@
   "scripts": {
     "clean": "rm -rf build/*",
     "start": "cross-env NODE_ENV=\"development\" webpack-dev-server",
-    "build": "cross-env NODE_ENV=\"production\" webpack --progress --hide-modules",
-    "predeploy": "npm-run-all clean build",
-    "deploy": "gh-pages -d build"
+    "build": "cross-env NODE_ENV=\"production\" webpack --hide-modules",
+    "actions": "npm-run-all clean build"
   },
   "eslintConfig": {
     "extends": "react-app"
