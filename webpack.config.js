@@ -1,24 +1,20 @@
-import path from 'path';
-import webpack from 'webpack';
-import WebpackDevServer from 'webpack-dev-server';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import CopyWebpackPlugin from 'copy-webpack-plugin';
-import WorkboxWebpackPlugin from 'workbox-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 
-const server: WebpackDevServer.Configuration = {
-  contentBase: path.resolve(__dirname, 'build'),
-  port: 9090,
-};
-
-const config: webpack.Configuration = {
+/** @type import('webpack').Configuration */
+module.exports = {
   mode: isDev ? 'development' : 'production',
-  entry: './src/index.tsx',
+  entry: {
+    app: './src/index.tsx',
+  },
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js',
+    filename: '[name].js',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -33,13 +29,7 @@ const config: webpack.Configuration = {
       {
         test: /\.css$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: isDev,
-              reloadAll: true,
-            },
-          },
+          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -64,7 +54,7 @@ const config: webpack.Configuration = {
     }),
     new CopyWebpackPlugin([
       {
-        from: 'public',
+        from: 'assets',
         to: './',
         toType: 'dir',
       },
@@ -81,7 +71,9 @@ const config: webpack.Configuration = {
   },
   stats: 'minimal',
   devtool: isDev ? 'source-map' : false,
-  devServer: server,
+  devServer: {
+    contentBase: path.resolve(__dirname, 'build'),
+    port: 1234,
+    open: true,
+  },
 };
-
-export default config;

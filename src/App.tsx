@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 import { Fab, Page, Range } from 'react-onsenui';
-
-import WebAudio from './webAudio';
+import { Howl } from 'howler';
+import moment from 'moment';
 
 import 'font-awesome/css/font-awesome.min.css';
 import 'onsenui/css/onsenui-core.min.css';
@@ -16,24 +15,18 @@ interface State {
   isRinging: boolean;
 }
 
-interface App {
-  state: State;
-  webAudio: WebAudio;
-  timerId: number;
-}
-
 class App extends Component {
-  public constructor(props: Readonly<{}>) {
-    super(props);
-    this.state = {
-      timeString: '3:00',
-      timeToCountDown: 180000,
-      isRunning: false,
-      isRinging: false,
-    };
-    this.webAudio = new WebAudio();
-    this.timerId = 0;
-  }
+  public state = {
+    timeString: '3:00',
+    timeToCountDown: 180000,
+    isRunning: false,
+    isRinging: false,
+  };
+
+  private timerId = 0;
+  private sound = new Howl({
+    src: './timer.mp3',
+  });
 
   private updateTimer = (ms: number): void => {
     const time = moment(ms);
@@ -44,9 +37,7 @@ class App extends Component {
   private countDown = (): void => {
     this.timerId = window.setInterval((): void => {
       if (this.state.timeToCountDown === 1000) {
-        this.webAudio.loadSound('./timer.mp3', (buffer: AudioBuffer): void =>
-          this.webAudio.playSound(buffer)
-        );
+        this.sound.play();
 
         this.setState({
           timeToCountDown: 0,
@@ -64,8 +55,9 @@ class App extends Component {
     }, 1000);
   };
 
-  public handleOnChange = (e: Event): void => {
+  private handleOnChange = (e: Event): void => {
     if (e.target) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
       const val = e.target.value;
       this.updateTimer(Number(val));
@@ -73,21 +65,18 @@ class App extends Component {
     }
   };
 
-  public handleOnClick = (): void => {
-    this.webAudio.init();
-
+  private handleOnClick = (): void => {
     if (this.state.timeToCountDown <= 0 && !this.state.isRinging) {
       return;
     }
 
     if (this.state.isRinging) {
-      this.webAudio.stop();
+      this.sound.stop();
       this.setState({ isRinging: false });
       return;
     }
 
     if (!this.state.isRunning) {
-      this.webAudio.playSilent();
       this.setState({ isRunning: true });
       this.countDown();
     } else {
@@ -96,7 +85,7 @@ class App extends Component {
     }
   };
 
-  public renderFixed = (): JSX.Element => {
+  private renderFixed = (): JSX.Element => {
     let iconName: string;
     if (this.state.isRunning) {
       iconName = 'fa fa-pause';
