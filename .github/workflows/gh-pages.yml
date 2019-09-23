@@ -19,7 +19,7 @@ jobs:
         node-version: '10.16'
     - run: |
         yarn install
-        yarn deploy
+        yarn actions
 
     - name: deploy
       uses: peaceiris/actions-gh-pages@v2.2.0
