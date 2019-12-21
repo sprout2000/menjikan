@@ -1,29 +1,31 @@
-name: github pages
+name: Release GitHub Pages
 
 on:
   push:
     branches:
-      - '!*'
-    tags:
-      - 'v*'
+      - master
 
 jobs:
-  build-deploy:
-    runs-on: ubuntu-18.04
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: ['12.x']
+
     steps:
     - uses: actions/checkout@master
 
-    - name: build
+    - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
-        node-version: '10.16'
+        node-version: ${{ matrix.node-version }}
     - run: |
         yarn install
-        yarn actions
-
+        yarn build
     - name: deploy
       uses: peaceiris/actions-gh-pages@v2.2.0
       env:
         ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         PUBLISH_BRANCH: gh-pages
-        PUBLISH_DIR: ./build
+        PUBLISH_DIR: ./dist

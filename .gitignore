@@ -1,6 +1,8 @@
 node_modules/
+dist/
 build/
 secrets/
+gh-pages
 yarn-*.log
 npm-*.log
 .DS_Store

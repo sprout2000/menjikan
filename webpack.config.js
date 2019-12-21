@@ -12,7 +12,7 @@ module.exports = {
     app: './src/App.tsx',
   },
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
   },
   resolve: {
@@ -62,7 +62,7 @@ module.exports = {
   stats: 'minimal',
   devtool: isDev ? 'source-map' : false,
   devServer: {
-    contentBase: path.resolve(__dirname, 'build'),
+    contentBase: path.resolve(__dirname, 'dist'),
     port: 1234,
     open: true,
   },
