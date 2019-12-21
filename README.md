@@ -1,8 +1,8 @@
-# ramen-timer
+# ramen
 
 ![GitHub build](https://img.shields.io/badge/build-passing-brightgreen?style=flat&logo=appveyor)
-[![GitHub license](https://img.shields.io/github/license/sprout2000/ramen-timer)](https://github.com/sprout2000/ramen-timer/blob/master/LICENSE.txt)
-[![GitHub issues](https://img.shields.io/github/issues/sprout2000/ramen-timer)](https://github.com/sprout2000/ramen-timer/issues)
+[![GitHub license](https://img.shields.io/github/license/sprout2000/ramen)](https://github.com/sprout2000/ramen/blob/master/LICENSE.txt)
+[![GitHub issues](https://img.shields.io/github/issues/sprout2000/ramen)](https://github.com/sprout2000/ramen/issues)
 
 ### A simple timer for ramen
 
