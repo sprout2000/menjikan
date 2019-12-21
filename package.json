@@ -11,21 +11,9 @@
     "url": "https://github.com/sprout2000"
   },
   "scripts": {
-    "clean": "rm -rf build/*",
     "start": "cross-env NODE_ENV=\"development\" webpack-dev-server",
-    "build": "cross-env NODE_ENV=\"production\" webpack --hide-modules",
-    "actions": "npm-run-all clean build"
+    "build": "cross-env NODE_ENV=\"production\" webpack --progress --hide-modules"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "dependencies": {},
   "devDependencies": {
     "@material-ui/core": "^4.8.0",
     "@material-ui/icons": "^4.5.1",
@@ -47,7 +35,6 @@
     "howler": "^2.1.2",
     "html-webpack-plugin": "^3.2.0",
     "moment": "^2.24.0",
-    "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
