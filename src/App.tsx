@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
-import { Fab, Page, Range } from 'react-onsenui';
+import ReactDOM from 'react-dom';
 import { Howl } from 'howler';
 import moment from 'moment';
-
-import 'font-awesome/css/font-awesome.min.css';
-import 'onsenui/css/onsenui-core.min.css';
-import 'onsenui/css/onsen-css-components.min.css';
-import './App.css';
 
 interface State {
   timeString: string;
@@ -16,7 +11,7 @@ interface State {
 }
 
 class App extends Component {
-  public state = {
+  public state: State = {
     timeString: '3:00',
     timeToCountDown: 180000,
     isRunning: false,
@@ -55,10 +50,8 @@ class App extends Component {
     }, 1000);
   };
 
-  private handleOnChange = (e: Event): void => {
+  private handleOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (e.target) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
       const val = e.target.value;
       this.updateTimer(Number(val));
       this.setState({ timeToCountDown: Number(val) });
@@ -85,29 +78,13 @@ class App extends Component {
     }
   };
 
-  private renderFixed = (): JSX.Element => {
-    let iconName: string;
-    if (this.state.isRunning) {
-      iconName = 'fa fa-pause';
-    } else if (!this.state.isRunning && this.state.isRinging) {
-      iconName = 'fa fa-volume-up';
-    } else {
-      iconName = 'fa fa-play';
-    }
-
-    return (
-      <Fab ripple position="bottom center" onClick={this.handleOnClick}>
-        <i className={iconName} style={{ color: '#FFF' }} />
-      </Fab>
-    );
-  };
-
   public render(): JSX.Element {
     return (
-      <Page renderFixed={this.renderFixed}>
+      <div>
         <div className="App">
           <div className="display-time">{this.state.timeString}</div>
-          <Range
+          <input
+            type="range"
             style={{
               width: '70%',
               maxWidth: '500px',
@@ -118,12 +95,21 @@ class App extends Component {
             min={0}
             step={5000}
             value={this.state.timeToCountDown}
-            onChange={this.handleOnChange}
+            onChange={(e): void => this.handleOnChange(e)}
           />
         </div>
-      </Page>
+        <div>
+          <button onClick={this.handleOnClick}>Start</button>
+        </div>
+      </div>
     );
   }
 }
 
-export default App;
+ReactDOM.render(<App />, document.getElementById('root'));
+
+if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+  window.addEventListener('load', (): void => {
+    navigator.serviceWorker.register('./service-worker.js');
+  });
+}

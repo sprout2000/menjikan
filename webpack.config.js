@@ -2,7 +2,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -10,7 +9,7 @@ const isDev = process.env.NODE_ENV === 'development';
 module.exports = {
   mode: isDev ? 'development' : 'production',
   entry: {
-    app: './src/index.tsx',
+    app: './src/App.tsx',
   },
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -27,19 +26,7 @@ module.exports = {
         loader: 'ts-loader',
       },
       {
-        test: /\.css$/,
-        use: [
-          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: isDev,
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(gif|tiff|jpe?g|png|svg|eot|wof|woff|woff2|ttf)$/,
+        test: /\.(gif|jpe?g|png|svg|eot|woff?2?|ttf)$/,
         loader: 'file-loader',
         options: {
           name: 'img/[name].[ext]',
@@ -59,7 +46,6 @@ module.exports = {
         toType: 'dir',
       },
     ]),
-    new MiniCssExtractPlugin({}),
     new WorkboxWebpackPlugin.GenerateSW({
       swDest: 'service-worker.js',
       clientsClaim: true,
