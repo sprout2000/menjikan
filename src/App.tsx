@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+
+import { withStyles, styled } from '@material-ui/core/styles';
+import Fab from '@material-ui/core/Fab';
+import Slider from '@material-ui/core/Slider';
+
+import PlayIcon from '@material-ui/icons/PlayArrowRounded';
+import PauseIcon from '@material-ui/icons/PauseRounded';
+import AlermIcon from '@material-ui/icons/AccessAlarmRounded';
+
 import { Howl } from 'howler';
 import moment from 'moment';
+
+import './App.css';
 
 interface State {
   timeString: string;
@@ -9,6 +20,72 @@ interface State {
   isRunning: boolean;
   isRinging: boolean;
 }
+
+const Container = styled('div')({
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+});
+
+const Display = styled('div')({
+  fontSize: '15vh',
+});
+
+const iOSBoxShadow =
+  '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
+
+const IOSSlider = withStyles({
+  root: {
+    color: '#3880ff',
+    height: 10,
+    width: '80%',
+    maxWidth: '600px',
+    padding: '40px 0',
+  },
+  thumb: {
+    height: 28,
+    width: 28,
+    backgroundColor: '#fff',
+    boxShadow: iOSBoxShadow,
+    marginTop: -10,
+    marginLeft: -10,
+    '&:focus,&:hover,&$active': {
+      boxShadow:
+        '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
+      '@media (hover: none)': {
+        boxShadow: iOSBoxShadow,
+      },
+    },
+  },
+  active: {},
+  track: {
+    height: 10,
+    borderRadius: 4,
+    backgroundColor: 'rgb(0, 122, 255)',
+    opacity: 0.5,
+  },
+  rail: {
+    height: 10,
+    opacity: 0.5,
+    backgroundColor: '#bfbfbf',
+    borderRadius: 4,
+  },
+  mark: {
+    backgroundColor: '#bfbfbf',
+    height: 8,
+    width: 1,
+    marginTop: -3,
+  },
+  markActive: {
+    opacity: 1,
+    backgroundColor: 'currentColor',
+  },
+})(Slider);
+
+const FabButton = styled(Fab)({
+  marginTop: '40px',
+});
 
 class App extends Component {
   public state: State = {
@@ -50,9 +127,11 @@ class App extends Component {
     }, 1000);
   };
 
-  private handleOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  private handleOnChange = (
+    e: React.ChangeEvent<{}>,
+    val: number | number[]
+  ): void => {
     if (e.target) {
-      const val = e.target.value;
       this.updateTimer(Number(val));
       this.setState({ timeToCountDown: Number(val) });
     }
@@ -80,36 +159,32 @@ class App extends Component {
 
   public render(): JSX.Element {
     return (
-      <div>
+      <Container>
         <div className="App">
-          <div className="display-time">{this.state.timeString}</div>
-          <input
-            type="range"
-            style={{
-              width: '70%',
-              maxWidth: '500px',
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }}
+          <Display>{this.state.timeString}</Display>
+          <IOSSlider
+            defaultValue={this.state.timeToCountDown}
             max={300000}
             min={0}
             step={5000}
             value={this.state.timeToCountDown}
-            onChange={(e): void => this.handleOnChange(e)}
+            onChange={(e, val): void => this.handleOnChange(e, val)}
           />
         </div>
         <div>
-          <button onClick={this.handleOnClick}>Start</button>
+          <FabButton color="secondary" onClick={this.handleOnClick}>
+            {this.state.isRunning ? (
+              <PauseIcon fontSize="large" />
+            ) : this.state.isRinging ? (
+              <AlermIcon fontSize="large" />
+            ) : (
+              <PlayIcon fontSize="large" />
+            )}
+          </FabButton>
         </div>
-      </div>
+      </Container>
     );
   }
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
-
-if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-  window.addEventListener('load', (): void => {
-    navigator.serviceWorker.register('./service-worker.js');
-  });
-}
