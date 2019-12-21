@@ -172,7 +172,10 @@ class App extends Component {
           />
         </div>
         <div>
-          <FabButton color="secondary" onClick={this.handleOnClick}>
+          <FabButton
+            aria-label="start"
+            color="secondary"
+            onClick={this.handleOnClick}>
             {this.state.isRunning ? (
               <PauseIcon fontSize="large" />
             ) : this.state.isRinging ? (
@@ -195,6 +198,6 @@ if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     (): void => {
       navigator.serviceWorker.register('./service-worker.js');
     },
-    { passive: true }
+    { passive: false }
   );
 }
