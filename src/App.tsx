@@ -190,7 +190,11 @@ class App extends Component {
 ReactDOM.render(<App />, document.getElementById('root'));
 
 if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-  window.addEventListener('load', (): void => {
-    navigator.serviceWorker.register('./service-worker.js');
-  });
+  window.addEventListener(
+    'load',
+    (): void => {
+      navigator.serviceWorker.register('./service-worker.js');
+    },
+    { passive: true }
+  );
 }
