@@ -105,7 +105,6 @@ const IOSSlider = withStyles({
 const App = (): JSX.Element => {
   const classes = useStyles();
 
-  const [time, setTime] = useState('3:00');
   const [left, setLeft] = useState(180000);
   const [active, setActive] = useState(false);
   const [loud, setLoud] = useState(false);
@@ -118,20 +117,18 @@ const App = (): JSX.Element => {
     src: './timer.mp3',
   });
 
-  const updateTimer = (ms: number): void => {
+  const toString = (ms: number): string => {
     const time = moment(ms);
     const timeString = time.format('m:ss');
-    setTime(timeString);
+
+    return timeString;
   };
 
   const handleOnChange = (
     e: React.ChangeEvent<{}>,
     val: number | number[]
   ): void => {
-    if (e.target) {
-      updateTimer(Number(val));
-      setLeft(Number(val));
-    }
+    if (e.target) setLeft(Number(val));
   };
 
   const handleOnClick = (): void => {
@@ -150,18 +147,15 @@ const App = (): JSX.Element => {
   };
 
   useEffect(() => {
-    if (active && left >= 0) {
+    if (active && left > 0) {
       const timerId = setInterval(() => tick(), 1000);
-      updateTimer(left);
 
-      return (): void => {
-        clearInterval(timerId);
-      };
+      return (): void => clearInterval(timerId);
     }
   });
 
   useEffect(() => {
-    if (left <= 0 && active) {
+    if (active && left <= 0) {
       setLoud(true);
       setActive(false);
     }
@@ -174,7 +168,7 @@ const App = (): JSX.Element => {
   return (
     <div className={classes.container}>
       <div>
-        <div className={classes.display}>{time}</div>
+        <div className={classes.display}>{toString(left)}</div>
         <IOSSlider
           defaultValue={left}
           max={300000}
