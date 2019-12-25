@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
-import { withStyles, styled } from '@material-ui/core/styles';
+import { createStyles, makeStyles, withStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import Slider from '@material-ui/core/Slider';
 
@@ -12,25 +12,44 @@ import AlermIcon from '@material-ui/icons/AccessAlarmRounded';
 import { Howl } from 'howler';
 import moment from 'moment';
 
-import './App.css';
-
-interface State {
-  timeString: string;
-  timeToCountDown: number;
-  isRunning: boolean;
-  isRinging: boolean;
-}
-
-const Container = styled('div')({
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-});
-
-const Display = styled('div')({
-  fontSize: '15vh',
-});
+const useStyles = makeStyles(() =>
+  createStyles({
+    '@global': {
+      html: {
+        margin: 0,
+        padding: 0,
+        height: '100%',
+      },
+      body: {
+        margin: 0,
+        padding: 0,
+        height: '100%',
+        color: '#fff',
+        backgroundColor: '#4a148c',
+        textAlign: 'center',
+        fontFamily:
+          '-apple-system, BlinkMacSystemFont, Roboto, Oxygen, sans-selif',
+      },
+      '#root': {
+        margin: 0,
+        padding: 0,
+        height: '100%',
+      },
+    },
+    container: {
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+    },
+    display: {
+      fontSize: '15vh',
+    },
+    fab: {
+      marginTop: '40px',
+    },
+  })
+);
 
 const iOSBoxShadow =
   '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
@@ -83,112 +102,106 @@ const IOSSlider = withStyles({
   },
 })(Slider);
 
-const FabButton = styled(Fab)({
-  marginTop: '40px',
-});
+const App = (): JSX.Element => {
+  const classes = useStyles();
 
-class App extends Component {
-  public state: State = {
-    timeString: '3:00',
-    timeToCountDown: 180000,
-    isRunning: false,
-    isRinging: false,
+  const [time, setTime] = useState('3:00');
+  const [left, setLeft] = useState(180000);
+  const [active, setActive] = useState(false);
+  const [loud, setLoud] = useState(false);
+
+  const tick = (): void => {
+    setLeft((left) => left - 1000);
   };
 
-  private timerId = 0;
-  private sound = new Howl({
+  const sound = new Howl({
     src: './timer.mp3',
   });
 
-  private updateTimer = (ms: number): void => {
+  const updateTimer = (ms: number): void => {
     const time = moment(ms);
     const timeString = time.format('m:ss');
-    this.setState({ timeString });
+    setTime(timeString);
   };
 
-  private countDown = (): void => {
-    this.timerId = window.setInterval((): void => {
-      if (this.state.timeToCountDown === 1000) {
-        this.sound.play();
-
-        this.setState({
-          timeToCountDown: 0,
-          isRunning: false,
-          isRinging: true,
-        });
-        window.clearInterval(this.timerId);
-        this.updateTimer(0);
-        return;
-      }
-
-      const timeToCountDown = this.state.timeToCountDown - 1000;
-      this.setState({ timeToCountDown });
-      this.updateTimer(this.state.timeToCountDown);
-    }, 1000);
-  };
-
-  private handleOnChange = (
+  const handleOnChange = (
     e: React.ChangeEvent<{}>,
     val: number | number[]
   ): void => {
     if (e.target) {
-      this.updateTimer(Number(val));
-      this.setState({ timeToCountDown: Number(val) });
+      updateTimer(Number(val));
+      setLeft(Number(val));
     }
   };
 
-  private handleOnClick = (): void => {
-    if (this.state.timeToCountDown <= 0 && !this.state.isRinging) {
-      return;
-    }
+  const handleOnClick = (): void => {
+    if (!loud && left <= 0) return;
 
-    if (this.state.isRinging) {
-      this.sound.stop();
-      this.setState({ isRinging: false });
-      return;
-    }
-
-    if (!this.state.isRunning) {
-      this.setState({ isRunning: true });
-      this.countDown();
+    if (!active && !loud) {
+      setActive(true);
     } else {
-      this.setState({ isRunning: false });
-      window.clearInterval(this.timerId);
+      setActive(false);
+    }
+
+    if (loud) {
+      setLoud(false);
+      sound.stop();
     }
   };
 
-  public render(): JSX.Element {
-    return (
-      <Container>
-        <div className="App">
-          <Display>{this.state.timeString}</Display>
-          <IOSSlider
-            defaultValue={this.state.timeToCountDown}
-            max={300000}
-            min={0}
-            step={5000}
-            value={this.state.timeToCountDown}
-            onChange={(e, val): void => this.handleOnChange(e, val)}
-          />
-        </div>
-        <div>
-          <FabButton
-            aria-label="start"
-            color="secondary"
-            onClick={this.handleOnClick}>
-            {this.state.isRunning ? (
-              <PauseIcon fontSize="large" />
-            ) : this.state.isRinging ? (
-              <AlermIcon fontSize="large" />
-            ) : (
-              <PlayIcon fontSize="large" />
-            )}
-          </FabButton>
-        </div>
-      </Container>
-    );
-  }
-}
+  useEffect(() => {
+    if (active && left >= 0) {
+      const timerId = setInterval(() => tick(), 1000);
+      updateTimer(left);
+
+      return (): void => {
+        clearInterval(timerId);
+      };
+    }
+  });
+
+  useEffect(() => {
+    if (left <= 0 && active) {
+      setLoud(true);
+      setActive(false);
+    }
+  }, [active, left]);
+
+  useEffect(() => {
+    if (loud) sound.play();
+  });
+
+  return (
+    <div className={classes.container}>
+      <div>
+        <div className={classes.display}>{time}</div>
+        <IOSSlider
+          defaultValue={left}
+          max={300000}
+          min={0}
+          step={5000}
+          value={left}
+          onChange={(e, val): void => handleOnChange(e, val)}
+        />
+      </div>
+      <div>
+        <Fab
+          className={classes.fab}
+          aria-label="start"
+          color="secondary"
+          onClick={handleOnClick}>
+          {active ? (
+            <PauseIcon fontSize="large" />
+          ) : loud ? (
+            <AlermIcon fontSize="large" />
+          ) : (
+            <PlayIcon fontSize="large" />
+          )}
+        </Fab>
+      </div>
+    </div>
+  );
+};
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
