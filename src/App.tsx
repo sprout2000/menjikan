@@ -8,6 +8,7 @@ import Slider from '@material-ui/core/Slider';
 import PlayIcon from '@material-ui/icons/PlayArrowRounded';
 import PauseIcon from '@material-ui/icons/PauseRounded';
 import AlermIcon from '@material-ui/icons/AccessAlarmRounded';
+import 'typeface-roboto-mono';
 
 import { Howl } from 'howler';
 import moment from 'moment';
@@ -27,8 +28,6 @@ const useStyles = makeStyles(() =>
         color: '#fff',
         backgroundColor: '#4a148c',
         textAlign: 'center',
-        fontFamily:
-          '-apple-system, BlinkMacSystemFont, Roboto, Oxygen, sans-selif',
       },
       '#root': {
         margin: 0,
@@ -44,6 +43,7 @@ const useStyles = makeStyles(() =>
     },
     display: {
       fontSize: '15vh',
+      fontFamily: "'Roboto Mono', mono-space",
     },
     fab: {
       marginTop: '40px',
