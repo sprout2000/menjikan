@@ -81,7 +81,7 @@ const IOSSlider = withStyles({
   track: {
     height: 10,
     borderRadius: 4,
-    backgroundColor: 'rgb(0, 122, 255)',
+    backgroundColor: '#f50055',
     opacity: 0.5,
   },
   rail: {
