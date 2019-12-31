@@ -1,11 +1,16 @@
 {
   "env": {
     "es6": true,
-    "browser": true
+    "node": true,
+    "browser": true,
+    "commonjs": true
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2018,
+    "ecmaFeatures": {
+      "jsx": true
+    },
     "sourceType": "module"
   },
   "settings": {
@@ -13,16 +18,20 @@
       "version": "detect"
     }
   },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint",
+    "prettier/react"
+  ],
   "plugins": [
+    "@typescript-eslint",
     "react",
     "react-hooks",
     "prettier"
-  ],
-  "extends": [
-    "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "plugin:react/recommended",
-    "plugin:prettier/recommended"
   ],
   "rules": {
     "prettier/prettier": [
