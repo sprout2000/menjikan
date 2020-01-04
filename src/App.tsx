@@ -5,6 +5,7 @@ import { Howl } from 'howler';
 
 import styled from '@material-ui/core/styles/styled';
 import withStyles from '@material-ui/core/styles/withStyles';
+import pink from '@material-ui/core/colors/pink';
 
 import Fab from '@material-ui/core/Fab';
 import Slider from '@material-ui/core/Slider';
@@ -29,7 +30,7 @@ const Display = styled('div')({
 });
 
 const FabButton = styled(Fab)({
-  marginTop: '40px',
+  marginTop: '1em',
 });
 
 const iOSBoxShadow =
@@ -62,8 +63,8 @@ const IOSSlider = withStyles({
   track: {
     height: 10,
     borderRadius: 4,
-    backgroundColor: '#f50055',
-    opacity: 0.5,
+    backgroundColor: pink[500],
+    opacity: 0.7,
   },
   rail: {
     height: 10,
