@@ -1,6 +1,6 @@
 {
   "name": "ramen",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A simple timer for ramen",
   "homepage": "https://sprout2000.github.io/ramen",
   "private": true,
@@ -12,12 +12,17 @@
   },
   "scripts": {
     "start": "cross-env NODE_ENV=\"development\" webpack-dev-server",
-    "build": "cross-env NODE_ENV=\"production\" webpack --progress --hide-modules"
+    "build": "cross-env NODE_ENV=\"production\" webpack --progress"
   },
-  "devDependencies": {
+  "dependencies": {
     "@material-ui/core": "^4.8.2",
     "@material-ui/icons": "^4.5.1",
-    "@material-ui/styles": "^4.8.2",
+    "howler": "^2.1.3",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "typeface-roboto-mono": "^0.0.75"
+  },
+  "devDependencies": {
     "@types/howler": "^2.1.2",
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
@@ -33,15 +38,10 @@
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^2.3.0",
     "file-loader": "^5.0.2",
-    "howler": "^2.1.3",
     "html-webpack-plugin": "^3.2.0",
-    "moment": "^2.24.0",
     "prettier": "^1.19.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
     "style-loader": "^1.1.2",
     "ts-loader": "^6.2.1",
-    "typeface-roboto-mono": "^0.0.75",
     "typescript": "^3.7.4",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",

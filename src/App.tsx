@@ -1,55 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
-import { createStyles, makeStyles, withStyles } from '@material-ui/core/styles';
+import { Howl } from 'howler';
+
+import styled from '@material-ui/core/styles/styled';
+import withStyles from '@material-ui/core/styles/withStyles';
+
 import Fab from '@material-ui/core/Fab';
 import Slider from '@material-ui/core/Slider';
 
 import PlayIcon from '@material-ui/icons/PlayArrowRounded';
 import PauseIcon from '@material-ui/icons/PauseRounded';
 import AlermIcon from '@material-ui/icons/AccessAlarmRounded';
+
+import './App.css';
 import 'typeface-roboto-mono';
 
-import { Howl } from 'howler';
-import moment from 'moment';
+const Container = styled('div')({
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+});
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    '@global': {
-      html: {
-        margin: 0,
-        padding: 0,
-        height: '100%',
-      },
-      body: {
-        margin: 0,
-        padding: 0,
-        height: '100%',
-        color: '#fff',
-        backgroundColor: '#4a148c',
-        textAlign: 'center',
-      },
-      '#root': {
-        margin: 0,
-        padding: 0,
-        height: '100%',
-      },
-    },
-    container: {
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-    },
-    display: {
-      fontSize: '15vh',
-      fontFamily: "'Roboto Mono', mono-space",
-    },
-    fab: {
-      marginTop: '40px',
-    },
-  })
-);
+const Display = styled('div')({
+  fontSize: '15vh',
+  fontFamily: "'Roboto Mono', mono-space",
+});
+
+const FabButton = styled(Fab)({
+  marginTop: '40px',
+});
 
 const iOSBoxShadow =
   '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
@@ -103,8 +84,6 @@ const IOSSlider = withStyles({
 })(Slider);
 
 const App = (): JSX.Element => {
-  const classes = useStyles();
-
   const [left, setLeft] = useState(180000);
   const [active, setActive] = useState(false);
   const [loud, setLoud] = useState(false);
@@ -117,9 +96,13 @@ const App = (): JSX.Element => {
     src: './timer.mp3',
   });
 
-  const toString = (ms: number): string => {
-    const time = moment(ms);
-    const timeString = time.format('m:ss');
+  const toString = (duration: number): string => {
+    const hour = Math.floor(duration / 3600000);
+    const minute = Math.floor((duration - 3600000 * hour) / 60000);
+    const mm = ('00' + minute).slice(-2);
+    const ms = ('00000' + (duration % 60000)).slice(-5);
+
+    const timeString = `${mm}:${ms.slice(0, 2)}`;
 
     return timeString;
   };
@@ -166,12 +149,12 @@ const App = (): JSX.Element => {
   });
 
   return (
-    <div className={classes.container}>
+    <Container>
       <div>
-        <div className={classes.display}>{toString(left)}</div>
+        <Display>{toString(left)}</Display>
         <IOSSlider
           defaultValue={left}
-          max={300000}
+          max={1000 * 60 * 6}
           min={0}
           step={5000}
           value={left}
@@ -179,21 +162,17 @@ const App = (): JSX.Element => {
         />
       </div>
       <div>
-        <Fab
-          className={classes.fab}
-          aria-label="start"
-          color="secondary"
-          onClick={handleOnClick}>
+        <FabButton aria-label='start' color='secondary' onClick={handleOnClick}>
           {active ? (
-            <PauseIcon fontSize="large" />
+            <PauseIcon fontSize='large' />
           ) : loud ? (
-            <AlermIcon fontSize="large" />
+            <AlermIcon fontSize='large' />
           ) : (
-            <PlayIcon fontSize="large" />
+            <PlayIcon fontSize='large' />
           )}
-        </Fab>
+        </FabButton>
       </div>
-    </div>
+    </Container>
   );
 };
 
