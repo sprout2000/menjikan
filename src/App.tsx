@@ -7,6 +7,7 @@ import styled from '@material-ui/core/styles/styled';
 import withStyles from '@material-ui/core/styles/withStyles';
 import pink from '@material-ui/core/colors/pink';
 
+import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
 import Slider from '@material-ui/core/Slider';
 
@@ -24,8 +25,8 @@ const Container = styled('div')({
   justifyContent: 'center',
 });
 
-const Display = styled('div')({
-  fontSize: '15vh',
+const Display = styled(Typography)({
+  fontWeight: 'normal',
   fontFamily: "'Roboto Mono', mono-space",
 });
 
@@ -152,7 +153,7 @@ const App = (): JSX.Element => {
   return (
     <Container>
       <div>
-        <Display>{toString(left)}</Display>
+        <Display variant='h1'>{toString(left)}</Display>
         <IOSSlider
           defaultValue={left}
           max={1000 * 60 * 6}
