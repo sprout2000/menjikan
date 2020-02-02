@@ -1,10 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 
 /** @type import('webpack').Configuration */
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: {
     app: './src/App.tsx',
   },
@@ -47,15 +48,13 @@ module.exports = {
         toType: 'dir',
       },
     ]),
+    new WorkboxWebpackPlugin.GenerateSW({
+      swDest: 'service-worker.js',
+      clientsClaim: true,
+      skipWaiting: true,
+    }),
   ],
   performance: {
     hints: false,
-  },
-  stats: 'minimal',
-  devtool: 'inline-source-map',
-  devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
-    port: 1234,
-    open: true,
   },
 };
