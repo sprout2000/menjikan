@@ -155,7 +155,6 @@ const App = (): JSX.Element => {
       <div>
         <Display variant='h1'>{toString(left)}</Display>
         <IOSSlider
-          defaultValue={left}
           max={1000 * 60 * 6}
           min={0}
           step={5000}
