@@ -6,4 +6,4 @@
 
 ### A simple timer for ramen
 
-<img width="264" alt="2018-10-27_16h48_24" src="https://user-images.githubusercontent.com/27530743/47601213-2cbd5800-da08-11e8-9927-1c926a0e9bfc.png">
+<img width="323" alt="2020-02-06-8 40 25" src="https://user-images.githubusercontent.com/52094761/73893231-6859f980-48bc-11ea-9c6f-f0113d552a10.png">
