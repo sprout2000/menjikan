@@ -85,12 +85,6 @@ const IOSSlider = withStyles({
   },
 })(Slider);
 
-const AppIcon = styled('img')({
-  width: '15%',
-  maxWidth: '96px',
-  maxHeight: '96px',
-});
-
 const App = (): JSX.Element => {
   const [left, setLeft] = useState(180000);
   const [active, setActive] = useState(false);
@@ -159,7 +153,7 @@ const App = (): JSX.Element => {
   return (
     <Container>
       <div>
-        <AppIcon src='./icons/icon-192.png' alt='' />
+        <img src='./icons/icon_128.png' alt='' />
       </div>
       <div>
         <Display variant='h1'>{toString(left)}</Display>
