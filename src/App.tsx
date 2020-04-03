@@ -153,10 +153,10 @@ const App = (): JSX.Element => {
   return (
     <Container>
       <div>
-        <img src='./icons/icon_128.png' alt='' />
+        <img src="./icons/icon_128.png" alt="" />
       </div>
       <div>
-        <Display variant='h1'>{toString(left)}</Display>
+        <Display variant="h1">{toString(left)}</Display>
         <IOSSlider
           max={1000 * 60 * 6}
           min={0}
@@ -166,13 +166,13 @@ const App = (): JSX.Element => {
         />
       </div>
       <div>
-        <FabButton aria-label='start' color='secondary' onClick={handleOnClick}>
+        <FabButton aria-label="start" color="secondary" onClick={handleOnClick}>
           {active ? (
-            <PauseIcon fontSize='large' />
+            <PauseIcon fontSize="large" />
           ) : loud ? (
-            <AlermIcon fontSize='large' />
+            <AlermIcon fontSize="large" />
           ) : (
-            <PlayIcon fontSize='large' />
+            <PlayIcon fontSize="large" />
           )}
         </FabButton>
       </div>
