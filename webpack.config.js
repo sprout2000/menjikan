@@ -1,39 +1,49 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin').GenerateSW;
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 
 /** @type import('webpack').Configuration */
 module.exports = {
   mode: isDev ? 'development' : 'production',
+  resolve: {
+    extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
+  },
   entry: {
     app: './src/App.tsx',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
-  },
-  resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        loader: 'ts-loader',
+        loaders: ['babel-loader', 'ts-loader'],
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: isDev,
+            },
+          },
+        ],
       },
       {
-        test: /\.(gif|jpe?g|png|svg|eot|woff?2?|ttf)$/,
+        test: /\.(bmp|gif|png|jpe?g|svg|ttf|eot|woff?2?)$/,
         loader: 'file-loader',
         options: {
-          name: 'img/[name].[ext]',
+          name: 'icons/[name].[ext]',
         },
       },
     ],
@@ -43,6 +53,8 @@ module.exports = {
         new HtmlWebpackPlugin({
           template: './src/index.html',
           favicon: './src/favicon.ico',
+          filename: 'index.html',
+          chunks: ['app', 'vendor'],
         }),
         new CopyWebpackPlugin({
           patterns: [{ from: 'assets', to: '.' }],
@@ -52,24 +64,38 @@ module.exports = {
         new HtmlWebpackPlugin({
           template: './src/index.html',
           favicon: './src/favicon.ico',
+          filename: 'index.html',
+          chunks: ['app', 'vendor'],
         }),
         new CopyWebpackPlugin({
           patterns: [{ from: 'assets', to: '.' }],
         }),
-        new WorkboxWebpackPlugin.GenerateSW({
+        new MiniCssExtractPlugin({}),
+        new WorkboxWebpackPlugin({
           swDest: 'service-worker.js',
           skipWaiting: true,
           clientsClaim: true,
         }),
       ],
+  optimization: {
+    minimizer: [new TerserWebpackPlugin(), new OptimizeCSSAssetsPlugin()],
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+        },
+      },
+    },
+  },
   performance: {
     hints: false,
   },
-  stats: 'minimal',
   devtool: isDev ? 'inline-source-map' : false,
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
-    port: 1234,
-    open: true,
+    port: 8080,
   },
 };
