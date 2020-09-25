@@ -1,6 +1,6 @@
 # ramen
 
-![GitHub build](https://img.shields.io/badge/build-passing-brightgreen?style=flat&logo=appveyor)
+![GitHub CI](https://github.com/sprout2000/ramen/workflows/GitHub%20CI/badge.svg)
 [![GitHub license](https://img.shields.io/github/license/sprout2000/ramen)](https://github.com/sprout2000/ramen/blob/master/LICENSE.txt)
 [![GitHub issues](https://img.shields.io/github/issues/sprout2000/ramen)](https://github.com/sprout2000/ramen/issues)
 
