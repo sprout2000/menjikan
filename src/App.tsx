@@ -110,7 +110,7 @@ const App = (): JSX.Element => {
   };
 
   const handleOnChange = (
-    e: React.ChangeEvent<{}>,
+    e: React.ChangeEvent<unknown>,
     val: number | number[]
   ): void => {
     if (e.target) setLeft(Number(val));
