@@ -6,3 +6,4 @@ gh-pages
 yarn-*.log
 npm-*.log
 .DS_Store
+.env

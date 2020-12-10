@@ -1,31 +1,33 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const TerserWebpackPlugin = require('terser-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const WorkboxWebpackPlugin = require('workbox-webpack-plugin').GenerateSW;
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+import { Configuration } from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import TerserWebpackPlugin from 'terser-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import WorkboxWebpackPlugin from 'workbox-webpack-plugin';
+
+import path from 'path';
 
 const isDev = process.env.NODE_ENV === 'development';
 
-/** @type import('webpack').Configuration */
-module.exports = {
+const config: Configuration = {
   mode: isDev ? 'development' : 'production',
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
   },
   entry: {
-    app: './src/App.tsx',
+    app: path.join(__dirname, 'src', 'main.tsx'),
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '',
+    assetModuleFilename: 'images/[name][ext]',
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        loaders: ['babel-loader', 'ts-loader'],
+        use: ['babel-loader', 'ts-loader'],
       },
       {
         test: /\.css$/,
@@ -41,20 +43,16 @@ module.exports = {
       },
       {
         test: /\.(bmp|gif|png|jpe?g|svg|ttf|eot|woff?2?)$/,
-        loader: 'file-loader',
-        options: {
-          name: 'icons/[name].[ext]',
-        },
+        type: 'asset/resource',
       },
     ],
   },
   plugins: isDev
     ? [
         new HtmlWebpackPlugin({
-          template: './src/index.html',
-          favicon: './src/favicon.ico',
-          filename: 'index.html',
-          chunks: ['app', 'vendor'],
+          template: path.join(__dirname, 'src', 'index.html'),
+          favicon: path.join(__dirname, 'src', 'favicon.ico'),
+          inject: 'body',
         }),
         new CopyWebpackPlugin({
           patterns: [{ from: 'assets', to: '.' }],
@@ -62,33 +60,22 @@ module.exports = {
       ]
     : [
         new HtmlWebpackPlugin({
-          template: './src/index.html',
-          favicon: './src/favicon.ico',
-          filename: 'index.html',
-          chunks: ['app', 'vendor'],
+          template: path.join(__dirname, 'src', 'index.html'),
+          favicon: path.join(__dirname, 'src', 'favicon.ico'),
+          inject: 'body',
         }),
         new CopyWebpackPlugin({
           patterns: [{ from: 'assets', to: '.' }],
         }),
         new MiniCssExtractPlugin({}),
-        new WorkboxWebpackPlugin({
+        new WorkboxWebpackPlugin.GenerateSW({
           swDest: 'service-worker.js',
           skipWaiting: true,
           clientsClaim: true,
         }),
       ],
   optimization: {
-    minimizer: [new TerserWebpackPlugin(), new OptimizeCSSAssetsPlugin()],
-    runtimeChunk: 'single',
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
-          chunks: 'all',
-        },
-      },
-    },
+    minimizer: [new TerserWebpackPlugin()],
   },
   performance: {
     hints: false,
@@ -99,3 +86,5 @@ module.exports = {
     port: 8080,
   },
 };
+
+export default config;
