@@ -18,32 +18,16 @@
       "version": "detect"
     }
   },
-  "plugins": ["@typescript-eslint", "react", "react-hooks", "prettier"],
+  "plugins": ["@typescript-eslint", "react", "react-hooks"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:prettier/recommended",
+    "prettier",
     "prettier/@typescript-eslint",
     "prettier/react"
   ],
-  "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "singleQuote": true,
-        "jsxBracketSameLine": true
-      }
-    ]
-  },
-  "overrides": [
-    {
-      "files": ["*.js"],
-      "rules": {
-        "@typescript-eslint/no-var-requires": "off"
-      }
-    }
-  ]
+  "rules": {}
 }

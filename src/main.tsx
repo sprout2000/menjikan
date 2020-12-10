@@ -15,7 +15,7 @@ import PlayIcon from '@material-ui/icons/PlayArrowRounded';
 import PauseIcon from '@material-ui/icons/PauseRounded';
 import AlermIcon from '@material-ui/icons/AccessAlarmRounded';
 
-import './App.css';
+import './styles.css';
 import 'typeface-roboto-mono';
 
 const Container = styled('div')({
