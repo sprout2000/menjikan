@@ -53,9 +53,7 @@ const config: Configuration = {
           template: path.join(__dirname, 'src', 'index.html'),
           favicon: path.join(__dirname, 'src', 'favicon.ico'),
           inject: 'body',
-        }),
-        new CopyWebpackPlugin({
-          patterns: [{ from: 'assets', to: '.' }],
+          scriptLoading: 'blocking',
         }),
       ]
     : [
@@ -63,6 +61,7 @@ const config: Configuration = {
           template: path.join(__dirname, 'src', 'index.html'),
           favicon: path.join(__dirname, 'src', 'favicon.ico'),
           inject: 'body',
+          scriptLoading: 'defer',
         }),
         new CopyWebpackPlugin({
           patterns: [{ from: 'assets', to: '.' }],
@@ -75,6 +74,7 @@ const config: Configuration = {
         }),
       ],
   optimization: {
+    minimize: true,
     minimizer: [new TerserWebpackPlugin()],
   },
   performance: {
