@@ -16,6 +16,7 @@ import PauseIcon from '@material-ui/icons/PauseRounded';
 import AlermIcon from '@material-ui/icons/AccessAlarmRounded';
 
 import Timer from './timer.mp3';
+import RamenIcon from './icon_128.png';
 
 import './styles.css';
 import 'typeface-roboto-mono';
@@ -155,7 +156,7 @@ const App = (): JSX.Element => {
   return (
     <Container>
       <div>
-        <img src="./icons/icon_128.png" alt="" />
+        <img src={RamenIcon} alt="" />
       </div>
       <div>
         <Display variant="h1">{toString(left)}</Display>
