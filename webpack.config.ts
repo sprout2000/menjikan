@@ -18,7 +18,7 @@ const config: Configuration = {
     app: path.join(__dirname, 'src', 'main.tsx'),
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'public'),
     publicPath: '',
     assetModuleFilename: 'images/[name][ext]',
   },
@@ -50,7 +50,7 @@ const config: Configuration = {
   plugins: isDev
     ? [
         new HtmlWebpackPlugin({
-          template: path.join(__dirname, 'src', 'index.html'),
+          template: path.join(__dirname, 'src', 'index.dev.html'),
           favicon: path.join(__dirname, 'src', 'favicon.ico'),
           inject: 'body',
           scriptLoading: 'blocking',
@@ -82,8 +82,9 @@ const config: Configuration = {
   },
   devtool: isDev ? 'inline-source-map' : false,
   devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
+    contentBase: path.resolve(__dirname, 'public'),
     port: 8080,
+    open: true,
   },
 };
 

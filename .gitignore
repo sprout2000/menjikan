@@ -1,6 +1,7 @@
 node_modules/
 dist/
 build/
+public/
 secrets/
 gh-pages
 yarn-*.log
