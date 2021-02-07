@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import { Howl } from 'howler';
+import NoSleep from 'nosleep.js';
 
 import styled from '@material-ui/core/styles/styled';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -93,6 +94,8 @@ const App = (): JSX.Element => {
   const [active, setActive] = useState(false);
   const [loud, setLoud] = useState(false);
 
+  const noSleep = new NoSleep();
+
   const tick = (): void => {
     setLeft((left) => left - 1000);
   };
@@ -124,8 +127,11 @@ const App = (): JSX.Element => {
 
     if (!active && !loud) {
       setActive(true);
+      noSleep.enable();
     } else {
       setActive(false);
+      noSleep.disable();
+      console.log('Wake Lock disabled.');
     }
 
     if (loud) {
