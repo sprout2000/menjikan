@@ -15,6 +15,8 @@ import PlayIcon from '@material-ui/icons/PlayArrowRounded';
 import PauseIcon from '@material-ui/icons/PauseRounded';
 import AlermIcon from '@material-ui/icons/AccessAlarmRounded';
 
+import Timer from './timer.mp3';
+
 import './styles.css';
 import 'typeface-roboto-mono';
 
@@ -95,7 +97,7 @@ const App = (): JSX.Element => {
   };
 
   const sound = new Howl({
-    src: './timer.mp3',
+    src: Timer,
   });
 
   const toString = (duration: number): string => {
