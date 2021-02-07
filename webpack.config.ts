@@ -42,7 +42,7 @@ const config: Configuration = {
         ],
       },
       {
-        test: /\.(bmp|gif|png|jpe?g|svg|ttf|eot|woff?2?)$/,
+        test: /\.(bmp|gif|png|jpe?g|svg|ttf|eot|woff?2?|mp3)$/,
         type: 'asset/resource',
       },
     ],
