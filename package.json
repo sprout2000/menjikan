@@ -9,9 +9,10 @@
     "name": "sprout2000"
   },
   "scripts": {
-    "build": "NODE_ENV=\\\"development\\\" ts-node ./esbuild.ts",
-    "build:prod": "NODE_ENV=\\\"production\\\" ts-node ./esbuild.ts",
-    "serve": "http-server -c-1",
+    "start": "run-p watch:*",
+    "watch:wait": "wait-on public/main.js && reload -d public -b",
+    "watch:build": "NODE_ENV=\\\"development\\\" ts-node ./esbuild.ts",
+    "build": "NODE_ENV=\\\"production\\\" ts-node ./esbuild.ts",
     "clean": "rm -f public/*.{js,css,map,mp3,png,woff*}"
   },
   "dependencies": {
@@ -29,10 +30,11 @@
     "@types/react": "^17.0.1",
     "@types/react-dom": "^17.0.0",
     "esbuild": "^0.8.43",
-    "http-server": "^0.12.3",
+    "npm-run-all": "^4.1.5",
     "reload": "^3.1.1",
     "ts-node": "^9.1.1",
-    "typescript": "^4.1.5"
+    "typescript": "^4.1.5",
+    "wait-on": "^5.2.1"
   },
   "optionalDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.15.0",
