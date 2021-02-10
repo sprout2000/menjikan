@@ -9,7 +9,6 @@
     "name": "sprout2000"
   },
   "scripts": {
-    "start": "nodemon",
     "build": "ts-node ./esbuild.dev.ts",
     "build:prod": "ts-node ./esbuild.ts",
     "serve": "http-server -c-1",
@@ -31,7 +30,6 @@
     "@types/react-dom": "^17.0.0",
     "esbuild": "^0.8.43",
     "http-server": "^0.12.3",
-    "nodemon": "^2.0.7",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.3"
   },
