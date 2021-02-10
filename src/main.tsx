@@ -4,8 +4,13 @@ import ReactDOM from 'react-dom';
 import { Howl } from 'howler';
 import NoSleep from 'nosleep.js';
 
-import styled from '@material-ui/core/styles/styled';
-import withStyles from '@material-ui/core/styles/withStyles';
+import {
+  styled,
+  createMuiTheme,
+  withStyles,
+  ThemeProvider,
+} from '@material-ui/core/styles';
+import { CssBaseline } from '@material-ui/core';
 import pink from '@material-ui/core/colors/pink';
 
 import Typography from '@material-ui/core/Typography';
@@ -19,8 +24,34 @@ import AlermIcon from '@material-ui/icons/AccessAlarmRounded';
 import Timer from './timer.mp3';
 import RamenIcon from './icon_128.png';
 
-import './styles.css';
 import 'typeface-roboto-mono';
+
+const theme = createMuiTheme({
+  overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        html: {
+          margin: 0,
+          padding: 0,
+          height: '100%',
+        },
+        body: {
+          margin: 0,
+          padding: 0,
+          height: '100%',
+          color: '#fff',
+          backgroundColor: '#4a148c',
+          textAlign: 'center',
+        },
+        '#root': {
+          margin: 0,
+          padding: 0,
+          height: '100%',
+        },
+      },
+    },
+  },
+});
 
 const Container = styled('div')({
   height: '100%',
@@ -40,6 +71,8 @@ const FabButton = styled(Fab)({
 
 const iOSBoxShadow =
   '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
+const iOSFocusShadow =
+  '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)';
 
 const IOSSlider = withStyles({
   root: {
@@ -57,8 +90,7 @@ const IOSSlider = withStyles({
     marginTop: -10,
     marginLeft: -10,
     '&:focus,&:hover,&$active': {
-      boxShadow:
-        '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
+      boxShadow: iOSFocusShadow,
       '@media (hover: none)': {
         boxShadow: iOSBoxShadow,
       },
@@ -160,32 +192,38 @@ const App = (): JSX.Element => {
   });
 
   return (
-    <Container>
-      <div>
-        <img src={RamenIcon} alt="" />
-      </div>
-      <div>
-        <Display variant="h1">{toString(left)}</Display>
-        <IOSSlider
-          max={1000 * 60 * 6}
-          min={0}
-          step={5000}
-          value={left}
-          onChange={(e, val): void => handleOnChange(e, val)}
-        />
-      </div>
-      <div>
-        <FabButton aria-label="start" color="secondary" onClick={handleOnClick}>
-          {active ? (
-            <PauseIcon fontSize="large" />
-          ) : loud ? (
-            <AlermIcon fontSize="large" />
-          ) : (
-            <PlayIcon fontSize="large" />
-          )}
-        </FabButton>
-      </div>
-    </Container>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Container>
+        <div>
+          <img src={RamenIcon} alt="" />
+        </div>
+        <div>
+          <Display variant="h1">{toString(left)}</Display>
+          <IOSSlider
+            max={1000 * 60 * 6}
+            min={0}
+            step={5000}
+            value={left}
+            onChange={(e, val): void => handleOnChange(e, val)}
+          />
+        </div>
+        <div>
+          <FabButton
+            aria-label="start"
+            color="secondary"
+            onClick={handleOnClick}>
+            {active ? (
+              <PauseIcon fontSize="large" />
+            ) : loud ? (
+              <AlermIcon fontSize="large" />
+            ) : (
+              <PlayIcon fontSize="large" />
+            )}
+          </FabButton>
+        </div>
+      </Container>
+    </ThemeProvider>
   );
 };
 
