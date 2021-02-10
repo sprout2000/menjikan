@@ -1,4 +1,5 @@
 import path from 'path';
+import { generateSW } from 'workbox-build';
 import { build, BuildFailure, BuildResult } from 'esbuild';
 
 const isDev = process.env.NODE_ENV === '"development"';
@@ -72,6 +73,13 @@ const esbuild = async () => {
 
       if (isDev) {
         console.log(`Watching.... ${new Date().toLocaleString()}`);
+      } else {
+        generateSW({
+          globDirectory: path.resolve(__dirname, 'public'),
+          swDest: path.resolve(__dirname, 'public/service-worker.js'),
+          skipWaiting: true,
+          clientsClaim: true,
+        }).then(() => console.log('Generated service-worker.js.'));
       }
     })
     .catch((err) => console.log(JSON.stringify(err)));
