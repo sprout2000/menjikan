@@ -9,8 +9,10 @@
     "name": "sprout2000"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=\"development\" webpack serve",
-    "build": "cross-env NODE_ENV=\"production\" webpack --progress"
+    "start": "run-p build serve",
+    "build": "ts-node ./esbuild.dev.ts",
+    "serve": "http-server -c-1",
+    "clean": "rm -f public/*.{js,css,map,html,mp3,png,woff*}"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",

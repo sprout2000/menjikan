@@ -59,7 +59,6 @@ const esbuild = async () => {
       '.woff': 'file',
       '.woff2': 'file',
     },
-    publicPath: `${path.resolve(__dirname, 'public/images')}`,
     watch: {
       onRebuild: (err, result) => {
         console.log('----------------------------');
