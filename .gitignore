@@ -1,7 +1,6 @@
 node_modules/
 dist/
 build/
-public/*.html
 public/*.js
 public/*.map
 public/*.css
