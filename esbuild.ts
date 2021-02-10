@@ -69,7 +69,7 @@ const esbuild = async () => {
   })
     .then(async () => {
       console.log('============================');
-      console.log(`Compile Finished: ${new Date().toLocaleDateString()}`);
+      console.log(`Compile Finished: ${new Date().toLocaleString()}`);
 
       if (isDev) {
         console.log(`Watching.... ${new Date().toLocaleString()}`);
