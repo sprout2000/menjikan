@@ -1,6 +1,0 @@
-{
-  "ignore": ["node_modules", "src"],
-  "watch": ["public"],
-  "exec": "yarn serve",
-  "ext": "js"
-}

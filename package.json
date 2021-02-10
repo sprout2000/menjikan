@@ -9,10 +9,10 @@
     "name": "sprout2000"
   },
   "scripts": {
-    "build": "ts-node ./esbuild.dev.ts",
-    "build:prod": "ts-node ./esbuild.ts",
+    "build": "NODE_ENV=\\\"development\\\" ts-node ./esbuild.ts",
+    "build:prod": "NODE_ENV=\\\"production\\\" ts-node ./esbuild.ts",
     "serve": "http-server -c-1",
-    "clean": "rm -f public/*.{js,css,map,html,mp3,png,woff*}"
+    "clean": "rm -f public/*.{js,css,map,mp3,png,woff*}"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
@@ -30,6 +30,7 @@
     "@types/react-dom": "^17.0.0",
     "esbuild": "^0.8.43",
     "http-server": "^0.12.3",
+    "reload": "^3.1.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.5"
   },
