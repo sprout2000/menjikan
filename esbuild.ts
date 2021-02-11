@@ -77,6 +77,7 @@ const esbuild = async () => {
         generateSW({
           globDirectory: path.resolve(__dirname, 'public'),
           swDest: path.resolve(__dirname, 'public/service-worker.js'),
+          sourcemap: false,
           skipWaiting: true,
           clientsClaim: true,
         }).then(() => console.log('Generated service-worker.js.'));
