@@ -1,7 +1,12 @@
 node_modules/
 dist/
 build/
-public/
+public/*.js
+public/*.map
+public/*.css
+public/*.png
+public/*.woff*
+public/*.mp3
 secrets/
 gh-pages
 yarn-*.log
