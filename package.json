@@ -1,13 +1,29 @@
 {
   "name": "ramen",
-  "version": "0.3.0",
   "description": "A simple timer for ramen",
-  "homepage": "https://sprout2000.github.io/ramen",
-  "private": true,
+  "version": "0.2.0",
   "license": "MIT",
   "author": {
     "name": "sprout2000"
   },
+  "homepage": "https://sprout2000.github.io/ramen",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sprout2000/ramen.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sprout2000/ramen/issues"
+  },
+  "keywords": [
+    "pwa",
+    "ramen",
+    "timer",
+    "react",
+    "typescript",
+    "material-ui",
+    "howler",
+    "nosleep.js"
+  ],
   "scripts": {
     "start": "cross-env NODE_ENV=\"development\" webpack serve",
     "build": "cross-env NODE_ENV=\"production\" webpack --progress"
