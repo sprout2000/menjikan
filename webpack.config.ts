@@ -2,10 +2,8 @@ import path from 'path';
 import { Configuration } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
-import TerserWebpackPlugin from 'terser-webpack-plugin';
 import WorkboxWebpackPlugin from 'workbox-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import CssMinimizerWebpackPlugin from 'css-minimizer-webpack-plugin';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -37,9 +35,7 @@ const config: Configuration = {
           isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
-            options: {
-              sourceMap: isDev,
-            },
+            options: { sourceMap: isDev },
           },
         ],
       },
@@ -60,28 +56,15 @@ const config: Configuration = {
       minify: !isDev,
       scriptLoading: 'defer',
     }),
+    new WorkboxWebpackPlugin.GenerateSW({
+      swDest: 'service-worker.js',
+      skipWaiting: true,
+      clientsClaim: true,
+      inlineWorkboxRuntime: true,
+    }),
   ],
-  optimization: {
-    minimize: !isDev,
-    minimizer: [
-      new TerserWebpackPlugin(),
-      new CssMinimizerWebpackPlugin(),
-      new WorkboxWebpackPlugin.GenerateSW({
-        swDest: 'service-worker.js',
-        skipWaiting: true,
-        clientsClaim: true,
-        inlineWorkboxRuntime: true,
-      }),
-    ],
-  },
-  cache: {
-    type: 'filesystem',
-    cacheDirectory: path.resolve(__dirname, '.cache'),
-  },
-  performance: {
-    hints: false,
-  },
   stats: 'errors-only',
+  performance: { hints: false },
   devtool: isDev ? 'inline-source-map' : false,
   devServer: {
     contentBase: path.resolve(__dirname, 'public'),
