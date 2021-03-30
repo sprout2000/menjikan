@@ -1,5 +1,6 @@
 node_modules
 public
+coverage
 npm-*.log
 yarn-*.log
 .env
