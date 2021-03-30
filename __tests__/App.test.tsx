@@ -1,12 +1,16 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import { App } from '../src/App';
 
 describe('App component', () => {
   test('render App', () => {
-    render(<App />);
-    screen.debug();
+    const { getByRole } = render(<App />);
+
+    expect(getByRole('img')).toHaveAttribute('src');
+    expect(getByRole('heading')).toHaveTextContent('03:00');
+    expect(getByRole('slider')).toBeVisible();
+    expect(getByRole('button')).toBeVisible();
   });
 });
