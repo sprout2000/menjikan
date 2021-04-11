@@ -58,7 +58,12 @@ const Container = styled('div')({
   justifyContent: 'center',
 });
 
+const IconContainer = styled('div')({
+  userSelect: 'none',
+});
+
 const Display = styled(Typography)({
+  userSelect: 'none',
   fontWeight: 'normal',
   fontFamily: "'Roboto Mono', mono-space",
 });
@@ -186,9 +191,9 @@ export const App: React.FC = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container>
-        <div>
+        <IconContainer>
           <img src={RamenIcon} alt="" />
-        </div>
+        </IconContainer>
         <div>
           <Display variant="h1">{toString(left)}</Display>
           <IOSSlider
