@@ -125,34 +125,27 @@ export const App: React.FC = () => {
   const [loud, setLoud] = useState(false);
 
   const noSleep = new NoSleep();
+  const sound = new Howl({ src: Timer });
 
-  const tick = (): void => {
-    setLeft((left) => left - 1000);
-  };
+  const tick = () => setLeft((left) => left - 1000);
 
-  const sound = new Howl({
-    src: Timer,
-  });
-
-  const toString = (duration: number): string => {
+  const toString = (duration: number) => {
     const hour = Math.floor(duration / 3600000);
     const minute = Math.floor((duration - 3600000 * hour) / 60000);
     const mm = ('00' + minute).slice(-2);
     const ms = ('00000' + (duration % 60000)).slice(-5);
 
-    const timeString = `${mm}:${ms.slice(0, 2)}`;
-
-    return timeString;
+    return `${mm}:${ms.slice(0, 2)}`;
   };
 
   const handleOnChange = (
     e: React.ChangeEvent<unknown>,
     val: number | number[]
-  ): void => {
+  ) => {
     if (e.target) setLeft(Number(val));
   };
 
-  const handleOnClick = (): void => {
+  const handleOnClick = () => {
     if (!loud && left <= 0) return;
 
     if (!active && !loud) {
@@ -174,7 +167,7 @@ export const App: React.FC = () => {
     if (active && left > 0) {
       const timerId = setInterval(() => tick(), 1000);
 
-      return (): void => clearInterval(timerId);
+      return () => clearInterval(timerId);
     }
   });
 
@@ -203,7 +196,7 @@ export const App: React.FC = () => {
             min={0}
             step={5000}
             value={left}
-            onChange={(e, val): void => handleOnChange(e, val)}
+            onChange={handleOnChange}
           />
         </div>
         <div>
