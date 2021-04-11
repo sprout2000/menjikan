@@ -1,6 +1,5 @@
 import path from 'path';
 import { Configuration } from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WorkboxWebpackPlugin from 'workbox-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
@@ -44,23 +43,17 @@ const config: Configuration = {
       },
     ],
   },
-  plugins: [
-    new MiniCssExtractPlugin(),
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-      favicon: './src/favicon.ico',
-      filename: 'index.html',
-      inject: 'body',
-      minify: !isDev,
-      scriptLoading: 'defer',
-    }),
-    new WorkboxWebpackPlugin.GenerateSW({
-      swDest: 'service-worker.js',
-      skipWaiting: true,
-      clientsClaim: true,
-      inlineWorkboxRuntime: true,
-    }),
-  ],
+  plugins: isDev
+    ? []
+    : [
+        new MiniCssExtractPlugin(),
+        new WorkboxWebpackPlugin.GenerateSW({
+          swDest: 'service-worker.js',
+          skipWaiting: true,
+          clientsClaim: true,
+          inlineWorkboxRuntime: true,
+        }),
+      ],
   stats: 'errors-only',
   performance: { hints: false },
   devtool: isDev ? 'inline-source-map' : false,
