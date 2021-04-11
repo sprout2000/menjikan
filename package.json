@@ -26,7 +26,9 @@
   ],
   "scripts": {
     "start": "cross-env NODE_ENV=\"development\" webpack serve",
-    "build": "cross-env NODE_ENV=\"production\" webpack --progress"
+    "build": "cross-env NODE_ENV=\"production\" webpack --progress",
+    "lint:eslint": "eslint . --fix",
+    "lint:prettier": "prettier . --write"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
