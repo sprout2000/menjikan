@@ -52,6 +52,12 @@ const config: Configuration = {
           skipWaiting: true,
           clientsClaim: true,
           inlineWorkboxRuntime: true,
+          runtimeCaching: [
+            {
+              urlPattern: /\.(ico|js|html)$|^icon-*\.png$/,
+              handler: 'NetworkFirst',
+            },
+          ],
         }),
       ],
   stats: 'errors-only',
