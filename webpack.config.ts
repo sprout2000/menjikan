@@ -1,6 +1,5 @@
 import path from 'path';
 import { Configuration } from 'webpack';
-import WorkboxWebpackPlugin from 'workbox-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -43,23 +42,7 @@ const config: Configuration = {
       },
     ],
   },
-  plugins: isDev
-    ? []
-    : [
-        new MiniCssExtractPlugin(),
-        new WorkboxWebpackPlugin.GenerateSW({
-          swDest: 'service-worker.js',
-          skipWaiting: true,
-          clientsClaim: true,
-          inlineWorkboxRuntime: true,
-          runtimeCaching: [
-            {
-              urlPattern: /\.(ico|js|html|png|mp3)$/,
-              handler: 'NetworkFirst',
-            },
-          ],
-        }),
-      ],
+  plugins: [new MiniCssExtractPlugin()],
   stats: 'errors-only',
   performance: { hints: false },
   devtool: isDev ? 'inline-source-map' : false,
