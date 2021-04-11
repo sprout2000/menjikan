@@ -1,7 +1,6 @@
 import path from 'path';
 import { Configuration } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import CopyWebpackPlugin from 'copy-webpack-plugin';
 import WorkboxWebpackPlugin from 'workbox-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
@@ -47,7 +46,6 @@ const config: Configuration = {
   },
   plugins: [
     new MiniCssExtractPlugin(),
-    new CopyWebpackPlugin({ patterns: [{ from: 'assets', to: '.' }] }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
       favicon: './src/favicon.ico',
