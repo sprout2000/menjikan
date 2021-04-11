@@ -1,3 +1,7 @@
 node_modules
 public
-docs
+docs/app.css
+docs/app.js
+docs/app.js.LICENSE.txt
+docs/manifest*
+docs/serviece-worker.js
