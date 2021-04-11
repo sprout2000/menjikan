@@ -1,18 +1,18 @@
 {
-  "name": "ramen",
+  "name": "menjikan",
   "description": "A simple timer for ramen",
   "version": "0.3.1",
   "license": "MIT",
   "author": {
     "name": "sprout2000"
   },
-  "homepage": "https://sprout2000.github.io/ramen",
+  "homepage": "https://sprout2000.github.io/menjikan",
   "repository": {
     "type": "git",
-    "url": "git@github.com:sprout2000/ramen.git"
+    "url": "git@github.com:sprout2000/menjikan.git"
   },
   "bugs": {
-    "url": "https://github.com/sprout2000/ramen/issues"
+    "url": "https://github.com/sprout2000/menjikan/issues"
   },
   "keywords": [
     "pwa",

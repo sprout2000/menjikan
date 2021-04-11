@@ -1,6 +1,6 @@
 {
-  "short_name": "Ramen",
-  "name": "Ramen",
+  "short_name": "麺時間",
+  "name": "麺時間 PWA",
   "icons": [
     {
       "src": "favicon.ico",
