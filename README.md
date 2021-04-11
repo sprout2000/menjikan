@@ -1,8 +1,6 @@
 # menjikan
 
-![GitHub CI](https://github.com/sprout2000/menjikan/workflows/GitHub%20CI/badge.svg)
 [![GitHub license](https://img.shields.io/github/license/sprout2000/menjikan)](https://github.com/sprout2000/menjikan/blob/master/LICENSE.txt)
-[![GitHub issues](https://img.shields.io/github/issues/sprout2000/menjikan)](https://github.com/sprout2000/menjikan/issues)
 
 A simple timer for ramen
 
