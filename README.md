@@ -4,7 +4,7 @@
 
 A simple timer for ramen
 
-<img width="323" alt="2020-02-06-8 40 25" src="https://user-images.githubusercontent.com/52094761/73893231-6859f980-48bc-11ea-9c6f-f0113d552a10.png">
+![2021-04-11-110221](https://user-images.githubusercontent.com/52094761/114289776-7bb2b700-9ab5-11eb-96d8-79de55200d1f.png)
 
 ## Privacy Policy
 
