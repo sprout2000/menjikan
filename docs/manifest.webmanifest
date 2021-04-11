@@ -1,6 +1,7 @@
 {
   "short_name": "麺時間",
   "name": "麺時間 PWA",
+  "categories": ["utilities"],
   "icons": [
     {
       "src": "favicon.ico",
@@ -22,6 +23,7 @@
   ],
   "start_url": "./?utm_source=homescreen",
   "display": "standalone",
+  "orientation": "landscape",
   "theme_color": "#4a148c",
   "background_color": "#4a148c"
 }
