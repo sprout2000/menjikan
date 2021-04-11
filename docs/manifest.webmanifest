@@ -23,7 +23,23 @@
   ],
   "start_url": "./?utm_source=homescreen",
   "display": "standalone",
-  "orientation": "landscape",
+  "orientation": "portrait",
   "theme_color": "#4a148c",
-  "background_color": "#4a148c"
+  "background_color": "#4a148c",
+  "shortcuts": [
+    {
+      "name": "麺時間を開く",
+      "short_name": "麺時間",
+      "description": "シンプルなラーメンタイマー",
+      "url": "./?utm_source=homescreen",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png",
+          "purpose": "any maskable"
+        }
+      ]
+    }
+  ]
 }
