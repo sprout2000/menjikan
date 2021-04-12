@@ -1,5 +1,8 @@
 import path from 'path';
 import { Configuration } from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import WorkboxWebpackPlugin from 'workbox-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -17,7 +20,7 @@ const config: Configuration = {
     path: path.resolve(__dirname, 'docs'),
     publicPath: '',
     filename: '[name].js',
-    assetModuleFilename: 'assets/[name][ext]',
+    assetModuleFilename: 'resources/[name][ext]',
   },
   module: {
     rules: [
@@ -42,7 +45,55 @@ const config: Configuration = {
       },
     ],
   },
-  plugins: [new MiniCssExtractPlugin()],
+  plugins: isDev
+    ? [
+        new HtmlWebpackPlugin({
+          template: './src/index.html',
+          favicon: './src/favicon.ico',
+          inject: 'body',
+          minify: !isDev,
+          scriptLoading: 'defer',
+        }),
+        new CopyWebpackPlugin({ patterns: [{ from: 'assets', to: '.' }] }),
+      ]
+    : [
+        new MiniCssExtractPlugin(),
+        new HtmlWebpackPlugin({
+          template: './src/index.html',
+          favicon: './src/favicon.ico',
+          inject: 'body',
+          minify: !isDev,
+          scriptLoading: 'defer',
+        }),
+        new CopyWebpackPlugin({ patterns: [{ from: 'assets', to: '.' }] }),
+        new WorkboxWebpackPlugin.GenerateSW({
+          swDest: 'service-worker.js',
+          sourcemap: false,
+          skipWaiting: true,
+          clientsClaim: true,
+          inlineWorkboxRuntime: true,
+          runtimeCaching: [
+            {
+              urlPattern: /\.(js|css|html)$/,
+              handler: 'NetworkFirst',
+              options: {
+                cacheName: 'pages',
+              },
+            },
+            {
+              urlPattern: /\.(ico|png|eot|woff?2?|mp3)$/,
+              handler: 'CacheFirst',
+              options: {
+                cacheName: 'assets',
+                expiration: {
+                  maxEntries: 50,
+                  maxAgeSeconds: 60 * 60 * 24 * 7,
+                },
+              },
+            },
+          ],
+        }),
+      ],
   stats: 'errors-only',
   performance: { hints: false },
   devtool: isDev ? 'inline-source-map' : false,
