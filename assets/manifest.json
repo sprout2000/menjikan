@@ -26,6 +26,13 @@
   "orientation": "portrait",
   "theme_color": "#4a148c",
   "background_color": "#4a148c",
+  "screenshots": [
+    {
+      "src": "icons/screenshot-746-551.png",
+      "sizes": "746x551",
+      "type": "image/png"
+    }
+  ],
   "shortcuts": [
     {
       "name": "麺時間を開く",
