@@ -8,8 +8,8 @@ module.exports = {
   inlineWorkboxRuntime: true,
   runtimeCaching: [
     {
-      urlPattern: /\.(?:png|ico|mp3|html|js|css)$/,
-      handler: 'CacheOnly',
+      urlPattern: /\.(css|js|png|woff|woff2|mp3|ico|html|json|webmanifest)$/,
+      handler: 'CacheFirst',
     },
   ],
 };
