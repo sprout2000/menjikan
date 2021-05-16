@@ -3,19 +3,22 @@ name: GitHub CI
 on:
   push:
     tags:
-      - v*
+      - 'v*'
+
 jobs:
   build:
-    runs-on: macos-10.15
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
 
       - name: Use Node.js 14.x
-        uses: actions/setup-node@master
+        uses: actions/setup-node@v1
         with:
           node-version: '14.x'
       - name: Install
-        run: yarn install --ignore-optional --frozen-lockfile
+        run: yarn install --frozen-lockfile --ignore-optional
+      - name: Test
+        run: yarn test
       - name: Build
         run: yarn build
       - name: Deploy
