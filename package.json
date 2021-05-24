@@ -31,7 +31,7 @@
     "lint:prettier": "prettier . --write"
   },
   "dependencies": {
-    "@material-ui/core": "^4.11.3",
+    "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
     "howler": "^2.2.1",
     "nosleep.js": "^0.12.0",
