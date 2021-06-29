@@ -1,4 +1,4 @@
-name: Release
+name: GitHub CI
 
 on:
   push:
@@ -16,9 +16,9 @@ jobs:
         with:
           node-version: '14.x'
       - name: Install
-        run: npm ci --no-optional
+        run: yarn install --ignore-optional
       - name: Build
-        run: npm run build
+        run: yarn build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
