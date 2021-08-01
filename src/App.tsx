@@ -208,7 +208,8 @@ export const App: React.FC = () => {
           <FabButton
             aria-label="start"
             color="secondary"
-            onClick={handleOnClick}>
+            onClick={handleOnClick}
+          >
             {active ? (
               <PauseIcon fontSize="large" />
             ) : loud ? (
