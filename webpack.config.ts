@@ -17,7 +17,7 @@ const config: Configuration = {
     app: './src/main.tsx',
   },
   output: {
-    path: path.resolve(__dirname, 'public'),
+    path: path.resolve(__dirname, 'docs'),
     publicPath: '',
     filename: '[name].js',
     assetModuleFilename: 'assets/[name][ext]',
@@ -45,60 +45,29 @@ const config: Configuration = {
       },
     ],
   },
-  plugins: isDev
-    ? [
-        new HtmlWebpackPlugin({
-          template: './src/index.html',
-          favicon: './src/favicon.ico',
-          inject: 'body',
-          minify: !isDev,
-          scriptLoading: 'defer',
-        }),
-        new CopyWebpackPlugin({ patterns: [{ from: 'assets', to: '.' }] }),
-      ]
-    : [
-        new MiniCssExtractPlugin(),
-        new HtmlWebpackPlugin({
-          template: './src/index.html',
-          favicon: './src/favicon.ico',
-          inject: 'body',
-          minify: !isDev,
-          scriptLoading: 'defer',
-        }),
-        new CopyWebpackPlugin({ patterns: [{ from: 'assets', to: '.' }] }),
-        new WorkboxWebpackPlugin.GenerateSW({
-          swDest: 'service-worker.js',
-          sourcemap: false,
-          skipWaiting: true,
-          clientsClaim: true,
-          inlineWorkboxRuntime: true,
-          runtimeCaching: [
-            {
-              urlPattern: /\.(js|css|html)$/,
-              handler: 'NetworkFirst',
-              options: {
-                cacheName: 'pages',
-              },
-            },
-            {
-              urlPattern: /\.(ico|png|eot|woff?2?|mp3)$/,
-              handler: 'CacheFirst',
-              options: {
-                cacheName: 'assets',
-                expiration: {
-                  maxEntries: 50,
-                  maxAgeSeconds: 60 * 60 * 24 * 7,
-                },
-              },
-            },
-          ],
-        }),
-      ],
+  plugins: [
+    new MiniCssExtractPlugin(),
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      favicon: './src/favicon.ico',
+      inject: 'body',
+      minify: !isDev,
+      scriptLoading: 'defer',
+    }),
+    new CopyWebpackPlugin({ patterns: [{ from: 'assets', to: '.' }] }),
+    new WorkboxWebpackPlugin.GenerateSW({
+      swDest: 'service-worker.js',
+      sourcemap: false,
+      skipWaiting: true,
+      clientsClaim: true,
+      inlineWorkboxRuntime: true,
+    }),
+  ],
   stats: 'errors-only',
   performance: { hints: false },
   devtool: isDev ? 'inline-source-map' : false,
   devServer: {
-    contentBase: path.resolve(__dirname, 'public'),
+    contentBase: path.resolve(__dirname, 'docs'),
     port: 1233,
   },
 };
