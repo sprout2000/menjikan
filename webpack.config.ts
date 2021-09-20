@@ -45,24 +45,36 @@ const config: Configuration = {
       },
     ],
   },
-  plugins: [
-    new MiniCssExtractPlugin(),
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-      favicon: './src/favicon.ico',
-      inject: 'body',
-      minify: !isDev,
-      scriptLoading: 'defer',
-    }),
-    new CopyWebpackPlugin({ patterns: [{ from: 'assets', to: '.' }] }),
-    new WorkboxWebpackPlugin.GenerateSW({
-      swDest: 'service-worker.js',
-      sourcemap: false,
-      skipWaiting: true,
-      clientsClaim: true,
-      inlineWorkboxRuntime: true,
-    }),
-  ],
+  plugins: isDev
+    ? [
+        new MiniCssExtractPlugin(),
+        new HtmlWebpackPlugin({
+          template: './src/index.html',
+          favicon: './src/favicon.ico',
+          inject: 'body',
+          minify: !isDev,
+          scriptLoading: 'defer',
+        }),
+        new CopyWebpackPlugin({ patterns: [{ from: 'assets', to: '.' }] }),
+      ]
+    : [
+        new MiniCssExtractPlugin(),
+        new HtmlWebpackPlugin({
+          template: './src/index.html',
+          favicon: './src/favicon.ico',
+          inject: 'body',
+          minify: !isDev,
+          scriptLoading: 'defer',
+        }),
+        new CopyWebpackPlugin({ patterns: [{ from: 'assets', to: '.' }] }),
+        new WorkboxWebpackPlugin.GenerateSW({
+          swDest: 'service-worker.js',
+          sourcemap: false,
+          skipWaiting: true,
+          clientsClaim: true,
+          inlineWorkboxRuntime: true,
+        }),
+      ],
   stats: 'errors-only',
   performance: { hints: false },
   devtool: isDev ? 'inline-source-map' : false,
