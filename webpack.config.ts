@@ -79,8 +79,11 @@ const config: Configuration = {
   performance: { hints: false },
   devtool: isDev ? 'inline-source-map' : false,
   devServer: {
-    contentBase: path.resolve(__dirname, 'docs'),
     port: 1233,
+    open: true,
+    static: {
+      publicPath: path.resolve(__dirname, 'docs'),
+    },
   },
 };
 
