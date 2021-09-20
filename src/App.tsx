@@ -4,7 +4,7 @@ import NoSleep from 'nosleep.js';
 
 import {
   styled,
-  createMuiTheme,
+  createTheme,
   withStyles,
   ThemeProvider,
 } from '@material-ui/core/styles';
@@ -24,7 +24,7 @@ import RamenIcon from './icon_128.png';
 
 import 'typeface-roboto-mono';
 
-const theme = createMuiTheme({
+const theme = createTheme({
   overrides: {
     MuiCssBaseline: {
       '@global': {
