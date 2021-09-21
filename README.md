@@ -1,7 +1,5 @@
 # 麺時間
 
-[![GitHub license](https://img.shields.io/github/license/sprout2000/menjikan)](https://github.com/sprout2000/menjikan/blob/master/LICENSE.txt)
-
 A simple timer for ramen (noodles).
 
 ![2021-06-10-0913](https://user-images.githubusercontent.com/52094761/121445318-2ec36200-c9cc-11eb-9d37-24e6ae00aa92.png)
