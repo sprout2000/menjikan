@@ -6,10 +6,7 @@
     <meta charset="utf-8" />
     <meta property="og:url" content="https://sprout2000.github.io/menjikan/" />
     <meta property="og:type" content="website" />
-    <meta
-      property="og:image"
-      content="https://sprout2000.github.io/menjikan/ogp.png"
-    />
+    <meta property="og:image" content="images/ogp.png" />
     <meta property="og:title" content="麺時間" />
     <meta property="og:description" content="シンプルなラーメンタイマー" />
     <meta http-equiv="content-language" content="ja" />
@@ -22,20 +19,21 @@
     <meta property="og:url" content="https://sprout2000.github.io/menjikan" />
     <meta
       name="msapplication-square70x70logo"
-      content="icons/mstile-icon-128.png"
+      content="images/mstile-icon-128.png"
     />
     <meta
       name="msapplication-square150x150logo"
-      content="icons/mstile-icon-270.png"
+      content="images/mstile-icon-270.png"
     />
     <meta
       name="msapplication-square310x310logo"
-      content="icons/mstile-icon-558.png"
+      content="images/mstile-icon-558.png"
     />
     <meta
       name="msapplication-wide310x150logo"
-      content="icons/mstile-icon-558-270.png"
+      content="images/mstile-icon-558-270.png"
     />
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
     <link rel="apple-touch-icon" href="icons/apple-icon-180.png" />
     <link
       rel="apple-touch-startup-image"
@@ -102,17 +100,11 @@
       href="icons/apple-splash-dark-1136-640.png"
       media="(prefers-color-scheme: dark) and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
     />
-
-    <link rel="manifest" href="manifest.json" />
-    <script
-      async
-      src="https://cdn.jsdelivr.net/npm/pwacompat"
-      crossorigin="anonymous"
-    ></script>
     <title>麺時間</title>
   </head>
   <body>
     <noscript> You need to enable JavaScript to run this app. </noscript>
     <div id="root"></div>
+    <script type="module" src="./main.tsx"></script>
   </body>
 </html>
