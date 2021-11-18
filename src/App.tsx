@@ -18,7 +18,7 @@ import AlarmRoundedIcon from '@mui/icons-material/AlarmRounded';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 
 import Timer from './timer.mp3';
-import RamenIcon from './icon_128.png';
+import RamenIcon from './icon-128.png';
 
 const theme = createTheme({
   palette: {
