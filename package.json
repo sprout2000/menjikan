@@ -16,13 +16,11 @@
   },
   "keywords": [
     "pwa",
+    "mui",
     "ramen",
     "timer",
     "react",
-    "typescript",
-    "material-ui",
-    "howler",
-    "nosleep.js"
+    "typescript"
   ],
   "scripts": {
     "dev": "vite",
@@ -35,13 +33,15 @@
     "prepare": "git config --local core.hooksPath .githooks"
   },
   "dependencies": {
-    "@material-ui/core": "^4.12.3",
-    "@material-ui/icons": "^4.11.2",
+    "@emotion/react": "^11.6.0",
+    "@emotion/styled": "^11.6.0",
+    "@fontsource/roboto-mono": "^4.5.0",
+    "@mui/icons-material": "^5.1.1",
+    "@mui/material": "^5.1.1",
     "howler": "^2.2.3",
     "nosleep.js": "^0.12.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "typeface-roboto-mono": "1.1.13"
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "@types/howler": "^2.2.4",

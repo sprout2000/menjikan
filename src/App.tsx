@@ -1,64 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+
 import { Howl } from 'howler';
 import NoSleep from 'nosleep.js';
 
-import {
-  styled,
-  createTheme,
-  withStyles,
-  ThemeProvider,
-} from '@material-ui/core/styles';
-import { CssBaseline } from '@material-ui/core';
-import pink from '@material-ui/core/colors/pink';
+import { pink } from '@mui/material/colors';
+import GlobalStyles from '@mui/material/GlobalStyles';
 
-import Typography from '@material-ui/core/Typography';
-import Fab from '@material-ui/core/Fab';
-import Slider from '@material-ui/core/Slider';
+import Fab from '@mui/material/Fab';
+import Slider from '@mui/material/Slider';
+import Typography from '@mui/material/Typography';
 
-import PlayIcon from '@material-ui/icons/PlayArrowRounded';
-import PauseIcon from '@material-ui/icons/PauseRounded';
-import AlermIcon from '@material-ui/icons/AccessAlarmRounded';
+import { styled } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+import PauseRoundedIcon from '@mui/icons-material/PauseRounded';
+import AlarmRoundedIcon from '@mui/icons-material/AlarmRounded';
+import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 
 import Timer from './timer.mp3';
 import RamenIcon from './icon_128.png';
 
-import 'typeface-roboto-mono';
-
 const theme = createTheme({
-  overrides: {
-    MuiCssBaseline: {
-      '@global': {
-        html: {
-          margin: 0,
-          padding: 0,
-          height: '100%',
-          overflow: 'hidden',
-        },
-        body: {
-          margin: 0,
-          padding: 0,
-          height: '100%',
-          overflow: 'hidden',
-          color: '#fff',
-          backgroundColor: '#4a148c',
-          textAlign: 'center',
-        },
-        '#root': {
-          margin: 0,
-          padding: 0,
-          height: '100%',
-          overflow: 'hidden',
-        },
-      },
+  palette: {
+    primary: {
+      main: pink[500],
     },
   },
 });
 
 const Container = styled('div')({
-  height: '100%',
+  height: '100vh',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
+  alignItems: 'center',
 });
 
 const IconContainer = styled('div')({
@@ -73,61 +48,50 @@ const Display = styled(Typography)({
 
 const FabButton = styled(Fab)({
   marginTop: '1em',
+  background: pink[500],
+  '&:hover': {
+    background: pink[700],
+  },
 });
 
 const iOSBoxShadow =
   '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
-const iOSFocusShadow =
-  '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)';
 
-const IOSSlider = withStyles({
-  root: {
-    color: '#3880ff',
-    height: 10,
-    width: '80%',
-    maxWidth: '600px',
-    padding: '40px 0',
-  },
-  thumb: {
+const IOSSlider = styled(Slider)(() => ({
+  color: '#3880ff',
+  height: 10,
+  width: '80%',
+  maxWidth: '600px',
+  padding: '40px 0',
+  '& .MuiSlider-thumb': {
     height: 28,
     width: 28,
     backgroundColor: '#fff',
     boxShadow: iOSBoxShadow,
-    marginTop: -10,
-    marginLeft: -10,
-    '&:focus,&:hover,&$active': {
-      boxShadow: iOSFocusShadow,
+    '&:focus, &:hover, &.Mui-active': {
+      boxShadow:
+        '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
       '@media (hover: none)': {
         boxShadow: iOSBoxShadow,
       },
     },
   },
-  active: {},
-  track: {
+  '& .MuiSlider-track': {
     height: 10,
+    opacity: 0.7,
+    border: 'none',
     borderRadius: 4,
     backgroundColor: pink[500],
-    opacity: 0.7,
   },
-  rail: {
+  '& .MuiSlider-rail': {
     height: 10,
     opacity: 0.5,
     backgroundColor: '#bfbfbf',
     borderRadius: 4,
   },
-  mark: {
-    backgroundColor: '#bfbfbf',
-    height: 8,
-    width: 1,
-    marginTop: -3,
-  },
-  markActive: {
-    opacity: 1,
-    backgroundColor: 'currentColor',
-  },
-})(Slider);
+}));
 
-export const App: React.FC = () => {
+export const App = () => {
   const [left, setLeft] = useState(180000);
   const [active, setActive] = useState(false);
   const [loud, setLoud] = useState(false);
@@ -146,10 +110,7 @@ export const App: React.FC = () => {
     return `${mm}:${ms.slice(0, 2)}`;
   };
 
-  const handleOnChange = (
-    e: React.ChangeEvent<unknown>,
-    val: number | number[]
-  ) => {
+  const handleOnChange = (e: Event, val: number | number[]) => {
     if (e.target) setLeft(Number(val));
   };
 
@@ -192,21 +153,23 @@ export const App: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
+      <GlobalStyles
+        styles={{
+          body: { margin: 0, color: '#fff', backgroundColor: '#4a148c' },
+        }}
+      />
       <Container>
         <IconContainer>
           <img src={RamenIcon} alt="" />
         </IconContainer>
-        <div>
-          <Display variant="h1">{toString(left)}</Display>
-          <IOSSlider
-            max={1000 * 60 * 6}
-            min={0}
-            step={5000}
-            value={left}
-            onChange={handleOnChange}
-          />
-        </div>
+        <Display variant="h1">{toString(left)}</Display>
+        <IOSSlider
+          max={1000 * 60 * 6}
+          min={0}
+          step={5000}
+          value={left}
+          onChange={handleOnChange}
+        />
         <div>
           <FabButton
             aria-label="start"
@@ -214,11 +177,11 @@ export const App: React.FC = () => {
             onClick={handleOnClick}
           >
             {active ? (
-              <PauseIcon fontSize="large" />
+              <PauseRoundedIcon fontSize="large" />
             ) : loud ? (
-              <AlermIcon fontSize="large" />
+              <AlarmRoundedIcon fontSize="large" />
             ) : (
-              <PlayIcon fontSize="large" />
+              <PlayArrowRoundedIcon fontSize="large" />
             )}
           </FabButton>
         </div>
