@@ -33,7 +33,7 @@
     "prepare": "git config --local core.hooksPath .githooks"
   },
   "dependencies": {
-    "@emotion/react": "^11.6.0",
+    "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
     "@fontsource/roboto-mono": "^4.5.0",
     "@mui/icons-material": "^5.1.1",
@@ -55,11 +55,11 @@
   },
   "optionalDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.4.0",
-    "@typescript-eslint/parser": "^5.4.0",
+    "@typescript-eslint/parser": "^5.5.0",
     "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-react": "^7.27.0",
+    "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "prettier": "^2.4.1"
+    "prettier": "^2.5.0"
   }
 }
