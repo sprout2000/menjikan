@@ -37,7 +37,7 @@
     "@emotion/styled": "^11.6.0",
     "@fontsource/roboto-mono": "^4.5.0",
     "@mui/icons-material": "^5.1.1",
-    "@mui/material": "^5.1.1",
+    "@mui/material": "^5.2.6",
     "howler": "^2.2.3",
     "nosleep.js": "^0.12.0",
     "react": "^17.0.2",
