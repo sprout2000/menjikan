@@ -1,6 +1,5 @@
 # 麺時間
 
-[![GitHub CI](https://github.com/sprout2000/menjikan/actions/workflows/deploy.yml/badge.svg)](https://github.com/sprout2000/menjikan/actions/workflows/deploy.yml)
 [![GitHub license](https://img.shields.io/github/license/sprout2000/menjikan)](https://github.com/sprout2000/menjikan/blob/master/LICENSE.md)
 [![Twitter](https://img.shields.io/twitter/url?style=flat-square&url=https%3A%2F%2Fgithub.com%2Fsprout2000%2Fmenjikan%2F)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fsprout2000%2Fmenjikan%2F)
 
