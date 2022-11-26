@@ -1,65 +1,29 @@
 {
   "name": "menjikan",
-  "description": "シンプルなラーメンタイマー",
+  "private": true,
   "version": "2.0.7",
-  "license": "MIT",
-  "author": {
-    "name": "sprout2000"
-  },
-  "homepage": "https://sprout2000.github.io/menjikan",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:sprout2000/menjikan.git"
-  },
-  "bugs": {
-    "url": "https://github.com/sprout2000/menjikan/issues"
-  },
-  "keywords": [
-    "pwa",
-    "mui",
-    "ramen",
-    "timer",
-    "react",
-    "typescript"
-  ],
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview",
-    "lint": "run-s lint:*",
-    "lint:eslint": "eslint --fix .",
-    "lint:prettier": "prettier --write .",
-    "postbuild": "cp -r images ./public",
-    "prepare": "git config --local core.hooksPath .githooks"
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.8.1",
-    "@emotion/styled": "^11.8.1",
-    "@fontsource/roboto-mono": "^4.5.3",
-    "@mui/icons-material": "^5.4.2",
-    "@mui/material": "^5.4.4",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.10.15",
     "howler": "^2.2.3",
     "nosleep.js": "^0.12.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "vite-plugin-pwa": "^0.13.3"
   },
   "devDependencies": {
-    "@types/howler": "^2.2.5",
-    "@types/react": "^17.0.39",
-    "@types/react-dom": "^17.0.11",
-    "@vitejs/plugin-react": "^1.2.0",
-    "npm-run-all": "^4.1.5",
-    "typescript": "^4.5.5",
-    "vite": "^2.8.6",
-    "vite-plugin-pwa": "^0.11.13"
-  },
-  "optionalDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.13.0",
-    "@typescript-eslint/parser": "^5.13.0",
-    "eslint": "^8.9.0",
-    "eslint-config-prettier": "^8.4.0",
-    "eslint-plugin-react": "^7.29.2",
-    "eslint-plugin-react-hooks": "^4.3.0",
-    "prettier": "^2.5.1"
+    "@types/howler": "^2.2.7",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "@vitejs/plugin-react": "^2.2.0",
+    "typescript": "^4.9.3",
+    "vite": "^3.2.4"
   }
 }

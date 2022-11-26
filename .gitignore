@@ -1,8 +1,4 @@
+dist
 node_modules
-public
-coverage
-npm-*.log
-yarn-*.log
 .env
-.cache
 .DS_Store

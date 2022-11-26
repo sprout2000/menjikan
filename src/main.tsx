@@ -1,20 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import { App } from './App';
 
-import '@fontsource/roboto-mono/300.css';
-import '@fontsource/roboto-mono/400.css';
-import '@fontsource/roboto-mono/500.css';
-import '@fontsource/roboto-mono/700.css';
-
 import { registerSW } from 'virtual:pwa-register';
 
-ReactDOM.render(
+createRoot(document.getElementById('root') as Element).render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
 
 registerSW();

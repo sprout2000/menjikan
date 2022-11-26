@@ -7,18 +7,15 @@ import { pink } from '@mui/material/colors';
 import GlobalStyles from '@mui/material/GlobalStyles';
 
 import Fab from '@mui/material/Fab';
+import Icon from '@mui/material/Icon';
 import Slider from '@mui/material/Slider';
 import Typography from '@mui/material/Typography';
 
 import { styled } from '@mui/material/styles';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import PauseRoundedIcon from '@mui/icons-material/PauseRounded';
-import AlarmRoundedIcon from '@mui/icons-material/AlarmRounded';
-import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
-
 import Timer from './timer.mp3';
-import RamenIcon from './icon-128.png';
+import RamenIcon from './icon.png';
 
 const theme = createTheme({
   palette: {
@@ -42,7 +39,7 @@ const IconContainer = styled('div')({
 
 const Display = styled(Typography)({
   userSelect: 'none',
-  fontWeight: 'normal',
+  fontWeight: '400',
   fontFamily: "'Roboto Mono', mono-space",
 });
 
@@ -177,11 +174,11 @@ export const App = () => {
             onClick={handleOnClick}
           >
             {active ? (
-              <PauseRoundedIcon fontSize="large" />
+              <Icon fontSize="large">pause</Icon>
             ) : loud ? (
-              <AlarmRoundedIcon fontSize="large" />
+              <Icon fontSize="large">notifications_active</Icon>
             ) : (
-              <PlayArrowRoundedIcon fontSize="large" />
+              <Icon fontSize="large">play_arrow</Icon>
             )}
           </FabButton>
         </div>
