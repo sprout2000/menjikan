@@ -1,21 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import { Howl } from 'howler';
-import NoSleep from 'nosleep.js';
+import { Howl } from "howler";
+import NoSleep from "nosleep.js";
 
-import { pink } from '@mui/material/colors';
-import GlobalStyles from '@mui/material/GlobalStyles';
+import { pink } from "@mui/material/colors";
+import GlobalStyles from "@mui/material/GlobalStyles";
 
-import Fab from '@mui/material/Fab';
-import Icon from '@mui/material/Icon';
-import Slider from '@mui/material/Slider';
-import Typography from '@mui/material/Typography';
+import Fab from "@mui/material/Fab";
+import Icon from "@mui/material/Icon";
+import Slider from "@mui/material/Slider";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
 
-import { styled } from '@mui/material/styles';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import Timer from './timer.mp3';
-import RamenIcon from './icon.png';
+import Timer from "./timer.mp3";
+import RamenIcon from "./icon.png";
+import { Box } from "@mui/material";
+
+import { QR } from "./QR";
+import { SideBar } from "./SIdeBar";
 
 const theme = createTheme({
   palette: {
@@ -25,65 +30,65 @@ const theme = createTheme({
   },
 });
 
-const Container = styled('div')({
-  height: '100vh',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
+const Container = styled("div")({
+  height: "100vh",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
 });
 
-const IconContainer = styled('div')({
-  userSelect: 'none',
+const IconContainer = styled("div")({
+  userSelect: "none",
 });
 
 const Display = styled(Typography)({
-  userSelect: 'none',
-  fontWeight: '400',
-  fontFamily: "'Roboto Mono', mono-space",
+  userSelect: "none",
+  fontWeight: "400",
+  fontFamily: "'Chivo Mono', mono-space",
 });
 
 const FabButton = styled(Fab)({
-  marginTop: '1em',
+  marginTop: "1em",
   background: pink[500],
-  '&:hover': {
+  "&:hover": {
     background: pink[700],
   },
 });
 
 const iOSBoxShadow =
-  '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
+  "0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)";
 
 const IOSSlider = styled(Slider)(() => ({
-  color: '#3880ff',
+  color: "#3880ff",
   height: 10,
-  width: '80%',
-  maxWidth: '600px',
-  padding: '40px 0',
-  '& .MuiSlider-thumb': {
+  width: "80%",
+  maxWidth: "600px",
+  padding: "40px 0",
+  "& .MuiSlider-thumb": {
     height: 28,
     width: 28,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     boxShadow: iOSBoxShadow,
-    '&:focus, &:hover, &.Mui-active': {
+    "&:focus, &:hover, &.Mui-active": {
       boxShadow:
-        '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
-      '@media (hover: none)': {
+        "0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)",
+      "@media (hover: none)": {
         boxShadow: iOSBoxShadow,
       },
     },
   },
-  '& .MuiSlider-track': {
+  "& .MuiSlider-track": {
     height: 10,
     opacity: 0.7,
-    border: 'none',
+    border: "none",
     borderRadius: 4,
     backgroundColor: pink[500],
   },
-  '& .MuiSlider-rail': {
+  "& .MuiSlider-rail": {
     height: 10,
     opacity: 0.5,
-    backgroundColor: '#bfbfbf',
+    backgroundColor: "#bfbfbf",
     borderRadius: 4,
   },
 }));
@@ -93,6 +98,12 @@ export const App = () => {
   const [active, setActive] = useState(false);
   const [loud, setLoud] = useState(false);
 
+  const [qrOpen, setQrOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const handleToggleQR = () => setQrOpen((qrOpen) => !qrOpen);
+  const handleToggleDrawer = () => setDrawerOpen((drawerOpen) => !drawerOpen);
+
   const noSleep = new NoSleep();
   const sound = new Howl({ src: Timer });
 
@@ -101,8 +112,8 @@ export const App = () => {
   const toString = (duration: number) => {
     const hour = Math.floor(duration / 3600000);
     const minute = Math.floor((duration - 3600000 * hour) / 60000);
-    const mm = ('00' + minute).slice(-2);
-    const ms = ('00000' + (duration % 60000)).slice(-5);
+    const mm = ("00" + minute).slice(-2);
+    const ms = ("00000" + (duration % 60000)).slice(-5);
 
     return `${mm}:${ms.slice(0, 2)}`;
   };
@@ -120,7 +131,7 @@ export const App = () => {
     } else {
       setActive(false);
       noSleep.disable();
-      console.log('Wake Lock disabled.');
+      console.log("Wake Lock disabled.");
     }
 
     if (loud) {
@@ -152,9 +163,26 @@ export const App = () => {
     <ThemeProvider theme={theme}>
       <GlobalStyles
         styles={{
-          body: { margin: 0, color: '#fff', backgroundColor: '#4a148c' },
+          body: { margin: 0, color: "#fff", backgroundColor: "#4a148c" },
         }}
       />
+      <Box sx={{ position: "fixed" }}>
+        <IconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          sx={{ mr: 2, marginLeft: 2 }}
+          onClick={handleToggleDrawer}
+        >
+          <Icon fontSize="large">menu</Icon>
+        </IconButton>
+      </Box>
+      <SideBar
+        drawerOpen={drawerOpen}
+        onToggleQR={handleToggleQR}
+        onToggleDrawer={handleToggleDrawer}
+      />
+      <QR onClose={handleToggleQR} qrOpen={qrOpen} />
       <Container>
         <IconContainer>
           <img src={RamenIcon} alt="" />
