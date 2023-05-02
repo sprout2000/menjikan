@@ -24,7 +24,7 @@ import RamenIcon from "./icon.png";
 import { Box } from "@mui/material";
 
 import { QR } from "./QR";
-import { SideBar } from "./SIdeBar";
+import { SideBar } from "./SideBar";
 
 const theme = createTheme({
   palette: {
