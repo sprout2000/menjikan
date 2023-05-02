@@ -198,21 +198,15 @@ export const App = () => {
           value={left}
           onChange={handleOnChange}
         />
-        <div>
-          <FabButton
-            aria-label="start"
-            color="secondary"
-            onClick={handleOnClick}
-          >
-            {active ? (
-              <PauseRoundedIcon fontSize="large" />
-            ) : loud ? (
-              <NotificationsActiveRoundedIcon fontSize="large" />
-            ) : (
-              <PlayArrowRoundedIcon fontSize="large" />
-            )}
-          </FabButton>
-        </div>
+        <FabButton aria-label="start" color="secondary" onClick={handleOnClick}>
+          {active ? (
+            <PauseRoundedIcon fontSize="large" />
+          ) : loud ? (
+            <NotificationsActiveRoundedIcon fontSize="large" />
+          ) : (
+            <PlayArrowRoundedIcon fontSize="large" />
+          )}
+        </FabButton>
       </Container>
     </ThemeProvider>
   );
