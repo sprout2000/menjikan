@@ -11,6 +11,8 @@
   "dependencies": {
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
+    "@fontsource/chivo": "^4.5.11",
+    "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.2",
     "howler": "^2.2.3",
     "nosleep.js": "^0.12.0",

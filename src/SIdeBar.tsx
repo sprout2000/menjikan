@@ -7,10 +7,13 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
 
-import Icon from "@mui/material/Icon";
-import { styled } from "@mui/material/styles";
+import ShareIcon from "@mui/icons-material/Share";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
-import icon from "./icon.png";
+import { styled } from "@mui/material/styles";
+import { blue, common } from "@mui/material/colors";
+
+import ramen from "./ramen.png";
 import pjson from "../package.json";
 
 type Props = {
@@ -50,7 +53,7 @@ export const SideBar = ({ drawerOpen, onToggleQR, onToggleDrawer }: Props) => {
       <DrawerList role="presentation" onClick={onToggleDrawer}>
         <DrawerHeader>
           <DrawerAvatar>
-            <img src={icon} width={64} />
+            <img src={ramen} width={64} />
           </DrawerAvatar>
           <p>麺時間 v{pjson.version}</p>
         </DrawerHeader>
@@ -58,16 +61,16 @@ export const SideBar = ({ drawerOpen, onToggleQR, onToggleDrawer }: Props) => {
           <ListItem disablePadding>
             <ListItemButton onClick={onToggleQR} aria-label="share">
               <ListItemIcon>
-                <Icon>share</Icon>
+                <ShareIcon style={{ color: blue[500] }} />
               </ListItemIcon>
-              <ListItemText secondary="Share" />
+              <ListItemText secondary="Share this app" />
             </ListItemButton>
           </ListItem>
           <Divider />
           <ListItem disablePadding>
             <ListItemButton onClick={handleURL} aria-label="repo">
               <ListItemIcon>
-                <Icon>open_in_new</Icon>
+                <GitHubIcon style={{ color: common.black }} />
               </ListItemIcon>
               <ListItemText secondary="GitHub Repo" />
             </ListItemButton>

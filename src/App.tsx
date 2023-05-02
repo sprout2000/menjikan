@@ -7,10 +7,14 @@ import { pink } from "@mui/material/colors";
 import GlobalStyles from "@mui/material/GlobalStyles";
 
 import Fab from "@mui/material/Fab";
-import Icon from "@mui/material/Icon";
 import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
+
+import MenuIcon from "@mui/icons-material/Menu";
+import PauseRoundedIcon from "@mui/icons-material/PauseRounded";
+import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
+import NotificationsActiveRoundedIcon from "@mui/icons-material/NotificationsActiveRounded";
 
 import { styled } from "@mui/material/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -168,13 +172,12 @@ export const App = () => {
       />
       <Box sx={{ position: "fixed" }}>
         <IconButton
-          size="large"
           edge="start"
           color="inherit"
-          sx={{ mr: 2, marginLeft: 2 }}
+          sx={{ mr: 2, margin: 2 }}
           onClick={handleToggleDrawer}
         >
-          <Icon fontSize="large">menu</Icon>
+          <MenuIcon sx={{ width: 32, height: 32 }} />
         </IconButton>
       </Box>
       <SideBar
@@ -202,11 +205,11 @@ export const App = () => {
             onClick={handleOnClick}
           >
             {active ? (
-              <Icon fontSize="large">pause</Icon>
+              <PauseRoundedIcon fontSize="large" />
             ) : loud ? (
-              <Icon fontSize="large">notifications_active</Icon>
+              <NotificationsActiveRoundedIcon fontSize="large" />
             ) : (
-              <Icon fontSize="large">play_arrow</Icon>
+              <PlayArrowRoundedIcon fontSize="large" />
             )}
           </FabButton>
         </div>
