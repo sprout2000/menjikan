@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { Howl } from "howler";
 import NoSleep from "nosleep.js";
@@ -109,7 +109,7 @@ export const App = () => {
   const handleToggleDrawer = () => setDrawerOpen((drawerOpen) => !drawerOpen);
 
   const noSleep = new NoSleep();
-  const sound = new Howl({ src: Timer });
+  const sound = useMemo(() => new Howl({ src: Timer }), []);
 
   const tick = () => setLeft((left) => left - 1000);
 
@@ -150,7 +150,7 @@ export const App = () => {
 
       return () => clearInterval(timerId);
     }
-  });
+  }, [active, left]);
 
   useEffect(() => {
     if (active && left <= 0) {
@@ -161,7 +161,7 @@ export const App = () => {
 
   useEffect(() => {
     if (loud) sound.play();
-  });
+  }, [loud, sound]);
 
   return (
     <ThemeProvider theme={theme}>
