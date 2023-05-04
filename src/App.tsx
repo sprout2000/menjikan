@@ -48,7 +48,7 @@ const IconContainer = styled("div")({
 
 const Display = styled(Typography)({
   userSelect: "none",
-  fontWeight: "400",
+  fontWeight: "600",
   fontFamily: "'Chivo Mono', mono-space",
 });
 
