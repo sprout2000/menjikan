@@ -9,31 +9,30 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.8",
-    "@emotion/styled": "^11.10.8",
-    "@fontsource/chivo": "^4.5.11",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
-    "@mui/material": "^5.12.3",
+    "@mui/material": "^5.13.1",
     "howler": "^2.2.3",
     "nosleep.js": "^0.12.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-qrcode-logo": "^2.9.0",
-    "vite-plugin-pwa": "^0.14.7"
+    "vite-plugin-pwa": "^0.15.0"
   },
   "devDependencies": {
     "@types/howler": "^2.2.7",
-    "@types/react": "^18.2.2",
-    "@types/react-dom": "^18.2.3",
-    "@typescript-eslint/eslint-plugin": "^5.59.2",
-    "@typescript-eslint/parser": "^5.59.2",
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "@typescript-eslint/parser": "^5.59.6",
     "@vitejs/plugin-react": "^4.0.0",
-    "eslint": "^8.39.0",
+    "eslint": "^8.41.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.8.8",
     "typescript": "^5.0.4",
-    "vite": "^4.3.4"
+    "vite": "^4.3.8"
   }
 }
