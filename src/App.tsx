@@ -6,6 +6,7 @@ import NoSleep from "nosleep.js";
 import { pink } from "@mui/material/colors";
 import GlobalStyles from "@mui/material/GlobalStyles";
 
+import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
@@ -21,7 +22,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import Timer from "./timer.mp3";
 import RamenIcon from "./icon.png";
-import { Box } from "@mui/material";
 
 import { QR } from "./QR";
 import { SideBar } from "./SideBar";
