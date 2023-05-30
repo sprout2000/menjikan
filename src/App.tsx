@@ -51,8 +51,8 @@ const IconContainer = styled("div")({
 
 const Display = styled(Typography)({
   userSelect: "none",
-  fontWeight: "600",
-  fontFamily: "'Chivo Mono', mono-space",
+  fontWeight: "500",
+  fontFamily: "'Roboto', mono-space",
 });
 
 const FabButton = styled(Fab)({
