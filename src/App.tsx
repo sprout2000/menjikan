@@ -3,22 +3,25 @@ import { useEffect, useMemo, useState } from "react";
 import { Howl } from "howler";
 import NoSleep from "nosleep.js";
 
-import { pink } from "@mui/material/colors";
-import GlobalStyles from "@mui/material/GlobalStyles";
+import {
+  Box,
+  Fab,
+  colors,
+  styled,
+  Slider,
+  Typography,
+  IconButton,
+  createTheme,
+  ThemeProvider,
+  GlobalStyles,
+} from "@mui/material";
 
-import Box from "@mui/material/Box";
-import Fab from "@mui/material/Fab";
-import Slider from "@mui/material/Slider";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-
-import MenuIcon from "@mui/icons-material/Menu";
-import PauseRoundedIcon from "@mui/icons-material/PauseRounded";
-import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
-import NotificationsActiveRoundedIcon from "@mui/icons-material/NotificationsActiveRounded";
-
-import { styled } from "@mui/material/styles";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {
+  Menu,
+  PauseRounded,
+  PlayArrowRounded,
+  NotificationsActiveRounded,
+} from "@mui/icons-material";
 
 import Timer from "./timer.mp3";
 import RamenIcon from "./icon.png";
@@ -29,7 +32,7 @@ import { SideBar } from "./SideBar";
 const theme = createTheme({
   palette: {
     primary: {
-      main: pink[500],
+      main: colors.pink[500],
     },
   },
 });
@@ -54,9 +57,9 @@ const Display = styled(Typography)({
 
 const FabButton = styled(Fab)({
   marginTop: "1em",
-  background: pink[500],
+  background: colors.pink[500],
   "&:hover": {
-    background: pink[700],
+    background: colors.pink[700],
   },
 });
 
@@ -87,7 +90,7 @@ const IOSSlider = styled(Slider)(() => ({
     opacity: 0.7,
     border: "none",
     borderRadius: 4,
-    backgroundColor: pink[500],
+    backgroundColor: colors.pink[500],
   },
   "& .MuiSlider-rail": {
     height: 10,
@@ -177,7 +180,7 @@ export const App = () => {
           sx={{ mr: 2, margin: 2 }}
           onClick={handleToggleDrawer}
         >
-          <MenuIcon sx={{ width: 32, height: 32 }} />
+          <Menu sx={{ width: 32, height: 32 }} />
         </IconButton>
       </Box>
       <SideBar
@@ -200,11 +203,11 @@ export const App = () => {
         />
         <FabButton aria-label="start" color="secondary" onClick={handleOnClick}>
           {active ? (
-            <PauseRoundedIcon fontSize="large" />
+            <PauseRounded fontSize="large" />
           ) : loud ? (
-            <NotificationsActiveRoundedIcon fontSize="large" />
+            <NotificationsActiveRounded fontSize="large" />
           ) : (
-            <PlayArrowRoundedIcon fontSize="large" />
+            <PlayArrowRounded fontSize="large" />
           )}
         </FabButton>
       </Container>

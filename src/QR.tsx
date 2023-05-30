@@ -1,7 +1,5 @@
 import { QRCode } from "react-qrcode-logo";
-
-import Backdrop from "@mui/material/Backdrop";
-import { styled } from "@mui/material/styles";
+import { Backdrop, styled } from "@mui/material";
 
 type Props = {
   qrOpen: boolean;

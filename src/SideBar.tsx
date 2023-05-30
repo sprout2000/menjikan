@@ -1,17 +1,17 @@
-import List from "@mui/material/List";
-import Avatar from "@mui/material/Avatar";
-import Drawer from "@mui/material/Drawer";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemButton from "@mui/material/ListItemButton";
+import {
+  List,
+  styled,
+  colors,
+  Avatar,
+  Drawer,
+  Divider,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ListItemButton,
+} from "@mui/material";
 
-import ShareIcon from "@mui/icons-material/Share";
-import GitHubIcon from "@mui/icons-material/GitHub";
-
-import { styled } from "@mui/material/styles";
-import { blue, common } from "@mui/material/colors";
+import { Share, GitHub } from "@mui/icons-material";
 
 import ramen from "./ramen.png";
 import pjson from "../package.json";
@@ -61,7 +61,7 @@ export const SideBar = ({ drawerOpen, onToggleQR, onToggleDrawer }: Props) => {
           <ListItem disablePadding>
             <ListItemButton onClick={onToggleQR} aria-label="share">
               <ListItemIcon>
-                <ShareIcon style={{ color: blue[500] }} />
+                <Share style={{ color: colors.blue[500] }} />
               </ListItemIcon>
               <ListItemText secondary="Share this app" />
             </ListItemButton>
@@ -70,7 +70,7 @@ export const SideBar = ({ drawerOpen, onToggleQR, onToggleDrawer }: Props) => {
           <ListItem disablePadding>
             <ListItemButton onClick={handleURL} aria-label="repo">
               <ListItemIcon>
-                <GitHubIcon style={{ color: common.black }} />
+                <GitHub style={{ color: colors.common.black }} />
               </ListItemIcon>
               <ListItemText secondary="GitHub Repo" />
             </ListItemButton>
